@@ -2,6 +2,7 @@ import { Link } from "@remix-run/react";
 import Fluent_board from "../icon/fluent_board";
 import Logo from "../icon/logo";
 import { AsideNavLink } from "./aside-nav-link";
+import { AsideTheme } from "./aside-theme";
 
 export const Aside: React.FC = () => {
   return (
@@ -21,6 +22,8 @@ export const Aside: React.FC = () => {
           <Fluent_board />+ Create New Board
         </button>
       </nav>
+
+      <AsideTheme />
     </aside>
   );
 };
