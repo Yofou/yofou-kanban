@@ -8,7 +8,7 @@ module.exports = {
 	],
 	theme: {
 		colors: {
-			blue: {
+			purple: {
 				300: "#A8A4FF",
 				600: "#635FC7",
 			},
@@ -23,8 +23,8 @@ module.exports = {
 			},
 			white: "#FFFFFF",
 			red: {
-				300: "#EA5555",
-				600: "#FF9898",
+				300: "#FF9898",
+				600: "#EA5555",
 			},
 		},
 		fontFamily: {
