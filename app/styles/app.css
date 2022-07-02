@@ -670,6 +670,16 @@ video {
   grid-template-columns: 1fr repeat(2,max-content);
 }
 
+.grid-cols-\[max-content\2c 1fr\2c repeat\(2\2c max-content\)\]{
+  grid-template-columns: -webkit-max-content 1fr repeat(2,-webkit-max-content);
+  grid-template-columns: max-content 1fr repeat(2,max-content);
+}
+
+.grid-cols-\[max-content\2c max-content\2c 1fr\2c repeat\(2\2c max-content\)\]{
+  grid-template-columns: -webkit-max-content -webkit-max-content 1fr repeat(2,-webkit-max-content);
+  grid-template-columns: max-content max-content 1fr repeat(2,max-content);
+}
+
 .grid-rows-\[max-content\2c 1fr\]{
   grid-template-rows: -webkit-max-content 1fr;
   grid-template-rows: max-content 1fr;
@@ -889,11 +899,28 @@ video {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.text-grey-100{
+  --tw-text-opacity: 1;
+  color: rgb(244 247 253 / var(--tw-text-opacity));
+}
+
 .transition{
   transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.transition-colors{
+  transition-property: color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.duration-150{
   transition-duration: 150ms;
 }
 
@@ -955,4 +982,9 @@ html,  body{
 .dark .dark\:text-white{
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.dark .dark\:text-grey-100{
+  --tw-text-opacity: 1;
+  color: rgb(244 247 253 / var(--tw-text-opacity));
 }

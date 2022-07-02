@@ -21,6 +21,7 @@ export const AsideTheme: React.FC = () => {
       >
         {theme && (
           <motion.div
+            transition={{ ease: "easeInOut", duration: 0.15 }}
             initial={{
               scale: 0,
             }}

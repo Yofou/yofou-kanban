@@ -76,7 +76,7 @@ export const Aside: React.FC = () => {
           }}
           key="toggle"
           onClick={onToggleSideBar}
-          className="absolute bottom-8 rounded-r-full py-[19px] pl-[18px] pr-[22px] text-white bg-purple-600"
+          className="absolute bottom-8 rounded-r-full py-[19px] pl-[18px] pr-[22px] text-white bg-purple-600 hover:bg-purple-300 transition-colors duration-150"
         >
           <img src="/open-eye.svg" alt="eye open" />
         </motion.button>
