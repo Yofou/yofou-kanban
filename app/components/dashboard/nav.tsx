@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { RootState } from "~/lib/store";
 import { Button } from "../shared/button";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Logo from "../icon/logo";
 
 export const Nav: React.FC = () => {
@@ -20,28 +20,32 @@ export const Nav: React.FC = () => {
       }  gap-6 px-6 pt-[22px] pb-7`}
       aria-label="Add Task navigaton"
     >
-      {!isDashboardOpen && (
-        <motion.div
-          transition={{ ease: "easeInOut", duration: 0.15 }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          layout
-          className="text-grey-700 dark:text-white"
-        >
-          <Logo />
-        </motion.div>
-      )}
-      <motion.h2
-        layout
-        className="text-heading-xl text-grey-700 dark:text-white"
-      >
-        Platform Launch
-      </motion.h2>
-      <Button theme="primaryL">+ Add New Task</Button>
-      <motion.button layout className="px-2">
-        <img src="/options.svg" alt="" />
-      </motion.button>
+      <AnimatePresence exitBeforeEnter>
+        <>
+          {!isDashboardOpen && (
+            <motion.div
+              transition={{ ease: "easeInOut", duration: 0.15 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              layout
+              className="text-grey-700 dark:text-white"
+            >
+              <Logo />
+            </motion.div>
+          )}
+          <motion.h2
+            layout
+            className="text-heading-xl text-grey-700 dark:text-white"
+          >
+            Platform Launch
+          </motion.h2>
+          <Button theme="primaryL">+ Add New Task</Button>
+          <motion.button layout className="px-2">
+            <img src="/options.svg" alt="" />
+          </motion.button>
+        </>
+      </AnimatePresence>
     </motion.nav>
   );
 };

@@ -1,13 +1,11 @@
-import { useFetcher } from "@remix-run/react"
+import { LoginDialog } from "~/components/index/login-dialog";
+import { Nav } from "~/components/shared/nav";
 
 export default function Index() {
-	const fetcher = useFetcher()
-	const switchTheme = async () => {
-		fetcher.submit(null, { method: "post", action: "/api/theme" })
-	}
-
-	return <>
-		<p className="bg-red-300 dark:bg-grey-200 text-body-l">testing</p>
-		<button onClick={switchTheme}>switch theme</button>
-	</> 
+  return (
+    <div className="w-full h-full grid grid-rows-[max-content,1fr]">
+      <Nav>Login</Nav>
+      <LoginDialog />
+    </div>
+  );
 }
