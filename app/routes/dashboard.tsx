@@ -11,7 +11,7 @@ const Dashboard: React.FC = () => {
   return (
     <div
       className={`w-full h-full grid ${
-        isDashboardAsideOpen ? "grid-cols-[300px,1fr]" : "grid-cols-1"
+        isDashboardAsideOpen ? "grid-cols-[max-content,1fr]" : "grid-cols-1"
       }`}
     >
       <Aside />

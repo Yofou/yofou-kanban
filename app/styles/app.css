@@ -651,8 +651,9 @@ video {
   grid-auto-flow: row;
 }
 
-.grid-cols-\[300px\2c 1fr\]{
-  grid-template-columns: 300px 1fr;
+.grid-cols-\[max-content\2c 1fr\]{
+  grid-template-columns: -webkit-max-content 1fr;
+  grid-template-columns: max-content 1fr;
 }
 
 .grid-cols-1{
@@ -717,6 +718,10 @@ video {
 
 .place-self-center{
   place-self: center;
+}
+
+.overflow-hidden{
+  overflow: hidden;
 }
 
 .rounded-\[6px\]{
@@ -882,6 +887,14 @@ video {
 .text-white{
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.transition{
+  transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
 }
 
 * {

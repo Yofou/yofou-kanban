@@ -1,15 +1,15 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const dashboardAside = createSlice({
   name: "dashboard-aside",
   initialState: false,
   reducers: {
-    toggle: (state) => {
-      return !state;
+    set: (_, { payload }: PayloadAction<boolean>) => {
+      return payload;
     },
   },
 });
 
-export const { toggle } = dashboardAside.actions;
+export const { set } = dashboardAside.actions;
 
 export default dashboardAside.reducer;
