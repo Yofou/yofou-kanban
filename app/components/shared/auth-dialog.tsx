@@ -14,9 +14,13 @@ export const AuthDialog: React.FC<AuthDialogProps> = ({
       <h2 className="text-heading-xl mb-[30px] dark:text-white text-grey-700">
         {title}
       </h2>
-      <Form className="flex flex-col items-start gap-4" action={action}>
+      <form
+        className="flex flex-col items-start gap-4"
+        action={action}
+        method="post"
+      >
         {children}
-      </Form>
+      </form>
     </main>
   );
 };

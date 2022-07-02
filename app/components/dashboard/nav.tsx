@@ -8,6 +8,7 @@ export const Nav: React.FC = () => {
   const isDashboardOpen = useSelector(
     (state: RootState) => state.dashboardAside
   );
+
   return (
     // TODO: make aria-label more informant later on?
     <motion.nav
@@ -35,6 +36,7 @@ export const Nav: React.FC = () => {
             </motion.div>
           )}
           <motion.h2
+            transition={{ easings: "ease-in-out", duration: 0.15 }}
             layout
             className="text-heading-xl text-grey-700 dark:text-white"
           >
