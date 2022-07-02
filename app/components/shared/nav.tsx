@@ -17,15 +17,15 @@ export const Nav: React.FC<NavProps> = ({ children }) => {
         <Logo />
       </div>
 
-      <h2 className="text-heading-xl text-grey-700 dark:text-white">
+      <h2 className="text-heading-xl capitalize text-grey-700 dark:text-white">
         {children}
       </h2>
 
       <button onClick={switchTheme} className="text-grey-300 justify-self-end">
         {theme === "light" ? (
-          <img src="/moon.svg" alt="" />
+          <img src="/moon.svg" alt="Dark theme" />
         ) : (
-          <img src="/sun.svg" alt="" />
+          <img src="/sun.svg" alt="Light Theme" />
         )}
       </button>
     </nav>
