@@ -2,6 +2,8 @@ import { json, LoaderFunction, redirect } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
+import { Board } from "~/components/dashboard/board"
+import { NoColumn } from "~/components/dashboard/no-column"
 import { getSession } from "~/cookies"
 import { getOne as getOneBoard } from "~/lib/service/board.serivce"
 import { select as selectBoard } from "~/lib/store/boards-slice"
@@ -11,7 +13,7 @@ export const loader: LoaderFunction = async ({ params, request }) => {
 		request.headers.get("Cookie")
 	)
 
-	if (!session.data) return redirect("/")
+	if (session?.id?.length === 0) return redirect("/")
 	const id = parseInt(params["id"] ?? "NaN")
 	if (isNaN(id)) return redirect("/dashboard")
 	
@@ -31,7 +33,10 @@ const DashboardId: React.FC = () => {
 		dispatch( selectBoard(data.board) )
 	}, [data])
 
-	return <p>{data.board.id}</p>
+	
+	if (data.board.columns.length === 0) return <NoColumn/>
+	return <Board />
+
 }
 
 export default DashboardId

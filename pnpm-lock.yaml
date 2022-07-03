@@ -18,6 +18,7 @@ specifiers:
   eslint: ^8.15.0
   framer-motion: ^6.3.16
   joi: ^17.6.0
+  pastel-color: ^1.0.3
   postcss: ^8.4.14
   prettier: 2.7.1
   prisma: ^4.0.0
@@ -51,6 +52,7 @@ devDependencies:
   concurrently: 7.2.2
   eslint: 8.18.0
   joi: 17.6.0
+  pastel-color: 1.0.3
   postcss: 8.4.14
   prettier: 2.7.1
   prisma: 4.0.0
@@ -6262,6 +6264,10 @@ packages:
   /pascalcase/0.1.1:
     resolution: {integrity: sha512-XHXfu/yOQRy9vYOtUDVMN60OEJjW013GoObG1o+xwQTpB9eYJX/BjXMsdW13ZDPruFhYYn0AG22w0xgQMwl3Nw==}
     engines: {node: '>=0.10.0'}
+    dev: true
+
+  /pastel-color/1.0.3:
+    resolution: {integrity: sha512-VtKzbIgQUc+U0JBFcuNqcCPYfnPYZaf0VPpdqaRUaHYBwMTh3nT9ncq3gsQccqtmhlNdw1aNqZnefVvPE6dtmg==}
     dev: true
 
   /path-exists/3.0.0:
