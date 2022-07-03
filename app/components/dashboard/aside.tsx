@@ -1,7 +1,6 @@
 import { Link } from "@remix-run/react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { set as setDashboardAside } from "~/lib/dashboard-aside-slice";
-import { RootState } from "~/lib/store";
 import Fluent_board from "../icon/fluent_board";
 import Logo from "../icon/logo";
 import { AsideNavLink } from "./aside-nav-link";
@@ -10,7 +9,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
 export const Aside: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   const dispatch = useDispatch();
   const onToggleSideBar = () => {
@@ -47,7 +46,7 @@ export const Aside: React.FC = () => {
             <AsideNavLink href="/">Platform Launch</AsideNavLink>
             <AsideNavLink href="/">Marketing Plan</AsideNavLink>
             <AsideNavLink href="/">Roadmap</AsideNavLink>
-            <button className="text-left flex gap-4 items-center pl-8 py-[15px] text-heading-m text-purple-600">
+            <button className="text-left whitespace-pre-wrap flex gap-4 items-center pl-8 py-[15px] text-heading-m text-purple-600">
               <Fluent_board />+ Create New Board
             </button>
           </nav>

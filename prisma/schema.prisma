@@ -24,3 +24,42 @@ model Session {
 	userId Int
 	user User @relation(fields: [userId], references: [id])
 }
+
+model Boards {
+	id Int @id @default(autoincrement())
+	title String
+	
+	columns Columns[]
+}
+
+model Columns {
+	id Int @id @default(autoincrement())
+	title String
+	color String
+
+	board Boards @relation(fields: [boardId], references: [id])
+	boardId Int
+}
+
+enum Status {
+	Todo
+	Doing
+	Done
+}
+
+model Task {
+	id Int @id @default(autoincrement())
+	title String
+	description String
+
+	subtasks SubTask[]
+	status Status
+}
+
+model SubTask {
+	id Int @id @default(autoincrement())
+	title String
+
+	task Task @relation(fields: [taskId], references: [id])
+	taskId Int
+}

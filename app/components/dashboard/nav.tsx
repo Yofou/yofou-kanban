@@ -3,8 +3,15 @@ import { RootState } from "~/lib/store";
 import { Button } from "../shared/button";
 import { AnimatePresence, motion } from "framer-motion";
 import Logo from "../icon/logo";
+import { DropdownDialog } from "../shared/dropdown-dialog";
+import { useState } from "react";
+import { useDetectClickOutside } from "react-detect-click-outside";
 
 export const Nav: React.FC = () => {
+  const [showOptions, setShowOptions] = useState(false);
+  const ref = useDetectClickOutside({
+    onTriggered: () => setShowOptions(false),
+  });
   const isDashboardOpen = useSelector(
     (state: RootState) => state.dashboardAside
   );
@@ -43,9 +50,30 @@ export const Nav: React.FC = () => {
             Platform Launch
           </motion.h2>
           <Button theme="primaryL">+ Add New Task</Button>
-          <motion.button layout className="px-2">
-            <img src="/options.svg" alt="" />
-          </motion.button>
+          <div ref={ref} className="relative">
+            <motion.button
+              onClick={() => setShowOptions(!showOptions)}
+              layout
+              className="px-2"
+            >
+              <img src="/options.svg" alt="" />
+            </motion.button>
+
+            <DropdownDialog
+              className="absolute text-body-l text-grey-300 top-full right-full"
+              show={showOptions}
+            >
+              <button className="text-left focus:outline-none border-b border-b-[transparent] focus:border-purple-600">
+                Edit Button
+              </button>
+              <button className="text-red-600 text-left focus:outline-none border-b border-b-[transparent] focus:border-red-600">
+                Delete Board
+              </button>
+              <button className="text-red-600 text-left focus:outline-none border-b border-b-[transparent] focus:border-red-600">
+                Sign out
+              </button>
+            </DropdownDialog>
+          </div>
         </>
       </AnimatePresence>
     </motion.nav>

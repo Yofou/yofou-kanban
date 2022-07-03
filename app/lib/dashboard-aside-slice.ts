@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const dashboardAside = createSlice({
   name: "dashboard-aside",
-  initialState: false,
+  initialState: true,
   reducers: {
     set: (_, { payload }: PayloadAction<boolean>) => {
       return payload;
