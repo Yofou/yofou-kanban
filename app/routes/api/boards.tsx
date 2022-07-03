@@ -1,19 +1,9 @@
 import { ActionFunction } from "@remix-run/node";
-import JoiToHumanError from "~/lib/JoiToHumanError";
-import createBoard from "~/validators/create-board";
+import { del, post } from "~/lib/service/board.controller";
 
 export const action: ActionFunction = async ({ request }) => {
-  console.log("I am being hit right??");
-  if (request.method !== "POST") return null;
+  if (request.method === "POST") return post(request);
+  if (request.method === "DELETE") return del(request);
 
-  const data = await request.formData();
-  type Body = { [key: string]: FormDataEntryValue | FormDataEntryValue[] };
-  const body: Body = Object.fromEntries(data);
-  body["columns"] = data.getAll("columns");
-
-  const validator = createBoard.validate(body);
-  if (validator?.error) {
-    console.log({ ...validator, error: JoiToHumanError(validator.error) });
-  }
   return null;
 };

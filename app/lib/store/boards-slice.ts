@@ -1,12 +1,27 @@
+import { Boards, Columns, Task } from "@prisma/client";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
+export type Board = Boards & {
+  columns: (Columns & {
+    task: Task[];
+  })[];
+};
 
 const boardSlice = createSlice({
   name: "board",
-  initialState: [] as any[],
+  initialState: {
+    boards: [] as Board[],
+    selected: null as Board | null,
+  },
   reducers: {
-    set: (_, payload: PayloadAction<any[]>) => payload.payload,
+    set: (state, payload: PayloadAction<Board[]>) => {
+      state.boards = payload.payload;
+    },
+    select: (state, payload: PayloadAction<Board>) => {
+      state.selected = payload.payload;
+    },
   },
 });
 
-export const { set } = boardSlice.actions;
+export const { set, select } = boardSlice.actions;
 export default boardSlice.reducer;

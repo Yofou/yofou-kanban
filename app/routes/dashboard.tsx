@@ -1,10 +1,9 @@
 import { json, LoaderFunction, redirect } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { Outlet, useLoaderData } from "@remix-run/react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Aside } from "~/components/dashboard/aside";
 import { Nav } from "~/components/dashboard/nav";
-import { NoColumn } from "~/components/dashboard/no-column";
 import { getSession } from "~/cookies";
 import { getAllBoardTasks } from "~/lib/service/board.serivce";
 import { RootState } from "~/lib/store";
@@ -13,9 +12,9 @@ import { set as setUser } from "~/lib/store/user-slice";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const session = await getSession(request.headers.get("Cookie"));
-  const boards = await getAllBoardTasks();
-
   if (!session.data) return redirect("/");
+
+  const boards = await getAllBoardTasks(session.data.user.id);
   return json({
     user: session.data.user,
     boards,
@@ -29,7 +28,7 @@ const Dashboard: React.FC = () => {
   useEffect(() => {
     dispatch(setUser(data.user));
     dispatch(setBoards(data.boards));
-  }, []);
+  }, [data]);
 
   const isDashboardAsideOpen = useSelector(
     (state: RootState) => state.dashboardAside
@@ -43,7 +42,7 @@ const Dashboard: React.FC = () => {
       <Aside />
       <main className="grid grid-rows-[max-content,1fr]">
         <Nav />
-        <NoColumn />
+        <Outlet />
       </main>
     </div>
   );

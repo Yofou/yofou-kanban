@@ -1,5 +1,5 @@
 import { Link } from "@remix-run/react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { set as setDashboardAside } from "~/lib/store/dashboard-aside-slice";
 import Fluent_board from "../icon/fluent_board";
 import Logo from "../icon/logo";
@@ -9,11 +9,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { Modal } from "../shared/modal";
 import { AddBoard } from "../shared/add-board";
+import { RootState } from "~/lib/store";
 
 export const Aside: React.FC = () => {
   const [isCreateBoardOpen, setIsCreateBoardOpen] = useState(false);
   const onCreateBoard = () => setIsCreateBoardOpen(!isCreateBoardOpen);
   const [isOpen, setIsOpen] = useState(true);
+  const boards = useSelector((state: RootState) => state.boards.boards);
 
   const dispatch = useDispatch();
   const onToggleSideBar = () => {
@@ -46,11 +48,15 @@ export const Aside: React.FC = () => {
 
             <nav className="mt-[54px] flex flex-col">
               <h2 className="text-grey-300 uppercase ml-8 tracking-[2.4px] mb-5 text-heading-s">
-                All boards (*)
+                All boards ({boards.length})
               </h2>
-              <AsideNavLink href="/">Platform Launch</AsideNavLink>
-              <AsideNavLink href="/">Marketing Plan</AsideNavLink>
-              <AsideNavLink href="/">Roadmap</AsideNavLink>
+
+              {boards.map((board) => (
+                <AsideNavLink key={board.id} href={`/dashboard/${board.id}`}>
+                  {board.title}
+                </AsideNavLink>
+              ))}
+
               <button
                 onClick={onCreateBoard}
                 className="text-left whitespace-pre-wrap flex gap-4 items-center pl-8 py-[15px] text-heading-m text-purple-600"
@@ -95,7 +101,7 @@ export const Aside: React.FC = () => {
         show={isCreateBoardOpen}
         onClickedOutside={() => setIsCreateBoardOpen(false)}
       >
-        <AddBoard />
+        <AddBoard onModalClose={() => setIsCreateBoardOpen(false)} />
       </Modal>
     </>
   );
