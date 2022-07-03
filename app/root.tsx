@@ -10,10 +10,10 @@ import {
 } from "@remix-run/react";
 import styles from "./styles/app.css";
 import { store } from "./lib/store";
-import { Provider, useDispatch } from "react-redux";
+import { Provider } from "react-redux";
 import { LoaderFunction } from "@remix-run/node";
 import { theme, ThemeType } from "~/cookies";
-import { set as setTheme } from "./lib/theme-slice";
+import { set as setTheme } from "./lib/store/theme-slice";
 import { useEffect } from "react";
 
 export function links() {

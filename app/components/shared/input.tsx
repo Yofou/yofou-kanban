@@ -6,6 +6,7 @@ type InputProps = React.PropsWithChildren<{
   required?: boolean;
   defaultValue?: string;
   error?: string;
+  name?: string;
 }>;
 export const Input: React.FC<InputProps> = ({
   children,
@@ -14,6 +15,7 @@ export const Input: React.FC<InputProps> = ({
   required = false,
   defaultValue = "",
   error,
+  name,
 }) => {
   const [value, setValue] = useState(defaultValue);
   const showError = error && defaultValue === value;
@@ -26,7 +28,7 @@ export const Input: React.FC<InputProps> = ({
           showError ? "border-red-600" : "border-[#828FA3]/25"
         } outline-none focus:outline-none focus:border-purple-600 bg-[transparent] border`}
         type={type}
-        name={children?.toString()}
+        name={name ?? children?.toString()}
         autoFocus={autoFocus}
         required={required}
         value={value}

@@ -1,13 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authSlice from "./auth-slice";
+import boardsSlice from "./boards-slice";
 import dashboardAsideSlice from "./dashboard-aside-slice";
 import themeSlice from "./theme-slice";
+import userSlice from "./user-slice";
 
 export const store = configureStore({
   reducer: {
     theme: themeSlice,
     auth: authSlice,
     dashboardAside: dashboardAsideSlice,
+    boards: boardsSlice,
+    user: userSlice,
   },
 });
 

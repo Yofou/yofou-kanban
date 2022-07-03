@@ -1,5 +1,5 @@
 import { createCookie, createSessionStorage } from "@remix-run/node";
-import { db } from "./lib/app.server";
+import { db } from "./lib/server/db.server";
 
 export type ThemeType = "dark" | "light";
 export const theme = createCookie("theme", { maxAge: 60 * 60 * 24 * 30 * 12 });
@@ -8,10 +8,9 @@ export const sessionId = createCookie("sessionId", {
   maxAge: 60 * 60 * 24 * 30,
 });
 
-const foo = createSessionStorage({
+const sessionStorage = createSessionStorage({
   cookie: sessionId,
   async createData(data, expires) {
-    console.log(data);
     const id = await db.session.create({
       data: {
         userId: data.userId,
@@ -43,4 +42,4 @@ const foo = createSessionStorage({
   async deleteData(id) {},
 });
 
-export const { commitSession, getSession, destroySession } = foo;
+export const { commitSession, getSession, destroySession } = sessionStorage;

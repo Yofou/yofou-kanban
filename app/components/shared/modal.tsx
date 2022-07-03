@@ -13,7 +13,16 @@ export const Modal: React.FC<ModalProps> = ({
   show,
 }) => {
   const ref = useDetectClickOutside({
-    onTriggered: onClickedOutside,
+    onTriggered: (e: Event) => {
+      if (e instanceof KeyboardEvent) onClickedOutside();
+      if (
+        e?.target instanceof HTMLImageElement ||
+        e?.target instanceof HTMLButtonElement
+      )
+        return;
+
+      onClickedOutside();
+    },
   });
 
   return (

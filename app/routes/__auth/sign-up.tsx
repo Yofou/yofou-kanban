@@ -1,4 +1,4 @@
-import { set as setAuthTitle } from "~/lib/auth-slice";
+import { set as setAuthTitle } from "~/lib/store/auth-slice";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { AuthDialog } from "~/components/shared/auth-dialog";
@@ -12,8 +12,8 @@ import {
   redirect,
 } from "@remix-run/node";
 import createUserValidation from "~/validators/create-user";
-import { db } from "~/lib/app.server";
-import { hash } from "~/lib/argon.server";
+import { db } from "~/lib/server/db.server";
+import { hash } from "~/lib/server/argon.server";
 import JoiToHumanError from "~/lib/JoiToHumanError";
 import { getSession } from "~/cookies";
 

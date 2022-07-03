@@ -10,11 +10,11 @@ import { useDispatch } from "react-redux";
 import { AuthDialog } from "~/components/shared/auth-dialog";
 import { Button } from "~/components/shared/button";
 import { Input } from "~/components/shared/input";
-import { set as setAuthTitle } from "~/lib/auth-slice";
+import { set as setAuthTitle } from "~/lib/store/auth-slice";
 import JoiToHumanError from "~/lib/JoiToHumanError";
 import loginUserValidation from "~/validators/login-user";
-import { verify } from "~/lib/argon.server";
-import { db } from "~/lib/app.server";
+import { verify } from "~/lib/server/argon.server";
+import { db } from "~/lib/server/db.server";
 import { commitSession, getSession } from "~/cookies";
 
 export const loader: LoaderFunction = async ({ request }) => {
@@ -28,6 +28,7 @@ type LoginForm = {
   Email: string;
   Password: string;
 };
+
 export const action: ActionFunction = async ({ request }) => {
   if (request.method !== "POST") return json({});
 
