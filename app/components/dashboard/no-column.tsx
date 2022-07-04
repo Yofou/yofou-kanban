@@ -1,14 +1,11 @@
-import { useFetcher } from "@remix-run/react";
 import { useState } from "react";
 import { Button } from "../shared/button";
-import { Input } from "../shared/input";
 import { Modal } from "../shared/modal";
+import { AddColumn } from "./add-column";
 
 export const NoColumn: React.FC = () => {
 	const [show, setShow] = useState(false);
 	const toggle = () => setShow(!show);
-
-	const fetcher = useFetcher();
 
 	return (
 		<>
@@ -22,16 +19,7 @@ export const NoColumn: React.FC = () => {
 			</section>
 
 			<Modal show={show} onClickedOutside={() => setShow(false)}>
-				<h2 className="text-heading-l text-grey-700 dark:text-white mb-6">
-					Add New Column
-				</h2>
-
-				<fetcher.Form method="put">
-					<Input>Column name</Input>
-					<Button className="w-full mt-4" theme="primaryS">
-						Confirm
-					</Button>
-				</fetcher.Form>
+				<AddColumn onSubmit={() => setShow(false)} />
 			</Modal>
 		</>
 	);

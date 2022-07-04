@@ -41,14 +41,14 @@ export const Nav: React.FC = () => {
 
 	// TODO: make aria-label more informant later on?
 	return (
-		<>
+		<div className="bg-white dark:bg-grey-500 border-b border-grey-200 relative dark:border-grey-400 ">
 			<motion.nav
 				transition={{ ease: "easeInOut", duration: 0.15 }}
 				layout
-				className={`bg-white items-center dark:bg-grey-500 border-b border-grey-200 dark:border-grey-400 grid ${
+				className={`bg-white items-center dark:bg-grey-500 sticky top-0 grid ${
 					!isDashboardOpen
-						? "grid-cols-[max-content,1fr,repeat(2,max-content)]"
-						: "grid-cols-[1fr,repeat(2,max-content)]"
+						? "grid-cols-[max-content,1fr,repeat(2,max-content)] w-screen left-0"
+						: "grid-cols-[1fr,repeat(2,max-content)] w-[calc(100vw-300px)] left-[300px]"
 				}  gap-6 px-6 pt-[22px] pb-7`}
 				aria-label="Add Task navigaton"
 			>
@@ -129,6 +129,6 @@ export const Nav: React.FC = () => {
 				Are you sure you want to delete the ‘Platform Launch’ board? This action
 				will remove all columns and tasks and cannot be reversed.
 			</ConfirmDelete>
-		</>
+		</div>
 	);
 };
