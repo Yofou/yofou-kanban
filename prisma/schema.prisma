@@ -36,7 +36,7 @@ model Boards {
 }
 
 model Columns {
-	id Int @id @default(autoincrement())
+	id String @id @default(uuid())
 	title String
 	color String
 
@@ -57,7 +57,7 @@ model Task {
 	description String
 
 	column Columns @relation(fields: [columnId], references: [id], onDelete: Cascade)
-	columnId Int
+	columnId String
 	subtasks SubTask[]
 	status Status
 }

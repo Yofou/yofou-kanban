@@ -1,6 +1,6 @@
 import { json, LoaderFunction, redirect } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
-import { useEffect } from "react"
+import { useEffect, } from "react"
 import { useDispatch } from "react-redux"
 import { Board } from "~/components/dashboard/board"
 import { NoColumn } from "~/components/dashboard/no-column"

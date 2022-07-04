@@ -1,6 +1,9 @@
 import { Link } from "@remix-run/react";
 import { useDispatch, useSelector } from "react-redux";
-import { set as setDashboardAside } from "~/lib/store/dashboard-aside-slice";
+import {
+	setStaggered as setDashboardAsideOpenStaggered,
+	setValue as setDashboardAsideOpen,
+} from "~/lib/store/dashboard-aside-slice";
 import Fluent_board from "../icon/fluent_board";
 import Logo from "../icon/logo";
 import { AsideNavLink } from "./aside-nav-link";
@@ -14,16 +17,16 @@ import { RootState } from "~/lib/store";
 export const Aside: React.FC = () => {
 	const [isCreateBoardOpen, setIsCreateBoardOpen] = useState(false);
 	const onCreateBoard = () => setIsCreateBoardOpen(!isCreateBoardOpen);
-	const [isOpen, setIsOpen] = useState(true);
+	const isOpen = useSelector((state: RootState) => state.dashboardAside.value);
 	const boards = useSelector((state: RootState) => state.boards.boards);
 
 	const dispatch = useDispatch();
 	const onToggleSideBar = () => {
-		setIsOpen(!isOpen);
+		dispatch(setDashboardAsideOpen(!isOpen));
 	};
 
 	const setDashboardLayout = () => {
-		dispatch(setDashboardAside(isOpen));
+		dispatch(setDashboardAsideOpenStaggered(isOpen));
 	};
 
 	const selectedBoard = useSelector(
@@ -36,6 +39,7 @@ export const Aside: React.FC = () => {
 				{isOpen ? (
 					<motion.aside
 						layout
+						transition={{ ease: "easeInOut", duration: 0.15 }}
 						animate={{
 							width: "300px",
 						}}
@@ -67,7 +71,7 @@ export const Aside: React.FC = () => {
 
 							<button
 								onClick={onCreateBoard}
-								className="text-left whitespace-pre-wrap flex gap-4 items-center pl-8 py-[15px] text-heading-m text-purple-600"
+								className="text-left whitespace-nowrap flex gap-4 items-center pl-8 py-[15px] text-heading-m text-purple-600"
 							>
 								<Fluent_board />+ Create New Board
 							</button>
@@ -97,7 +101,7 @@ export const Aside: React.FC = () => {
 						}}
 						key="toggle"
 						onClick={onToggleSideBar}
-						className="absolute bottom-8 rounded-r-full py-[19px] pl-[18px] pr-[22px] text-white bg-purple-600 hover:bg-purple-300 transition-colors duration-150"
+						className="absolute z-10 bottom-8 rounded-r-full py-[19px] pl-[18px] pr-[22px] text-white bg-purple-600 hover:bg-purple-300 transition-colors duration-150"
 					>
 						<img src="/open-eye.svg" alt="eye open" />
 					</motion.button>

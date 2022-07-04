@@ -1,5 +1,6 @@
 import { json, LoaderFunction, redirect } from "@remix-run/node";
 import { Outlet, useLoaderData } from "@remix-run/react";
+import { LayoutGroup } from "framer-motion";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Aside } from "~/components/dashboard/aside";
@@ -31,18 +32,22 @@ const Dashboard: React.FC = () => {
 	}, [data]);
 
 	const isDashboardAsideOpen = useSelector(
-		(state: RootState) => state.dashboardAside
+		(state: RootState) => state.dashboardAside.staggered
 	);
 	return (
 		<div
 			className={`w-full h-full grid ${
-				isDashboardAsideOpen ? "grid-cols-[max-content,1fr]" : "grid-cols-1"
+				isDashboardAsideOpen
+					? "grid-cols-[max-content,calc(100vw-300px)]"
+					: "grid-cols-1"
 			}`}
 		>
 			<Aside />
-			<main className="grid grid-rows-[max-content,1fr]">
-				<Nav />
-				<Outlet />
+			<main className="w-full grid grid-rows-[max-content,1fr]">
+				<LayoutGroup>
+					<Nav />
+					<Outlet />
+				</LayoutGroup>
 			</main>
 		</div>
 	);

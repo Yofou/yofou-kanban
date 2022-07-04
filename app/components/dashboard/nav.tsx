@@ -8,6 +8,8 @@ import { useState } from "react";
 import { useDetectClickOutside } from "react-detect-click-outside";
 import { useFetcher } from "@remix-run/react";
 import { ConfirmDelete } from "~/components/shared/confirm-delete";
+import { Modal } from "../shared/modal";
+import { EditBoard } from "../shared/edit-board";
 
 export const Nav: React.FC = () => {
 	const fetcher = useFetcher();
@@ -17,12 +19,15 @@ export const Nav: React.FC = () => {
 	});
 
 	const isDashboardOpen = useSelector(
-		(state: RootState) => state.dashboardAside
+		(state: RootState) => state.dashboardAside.staggered
 	);
 
 	const selectedBoard = useSelector(
 		(state: RootState) => state.boards.selected
 	);
+
+	const [isEditBoardOpen, setIsEditBoardOpen] = useState(false);
+	const closeEditBoard = () => setIsEditBoardOpen(false);
 
 	const user = useSelector((state: RootState) => state.user);
 
@@ -39,16 +44,18 @@ export const Nav: React.FC = () => {
 		fetcher.submit(null, { method: "delete", action: "/api/session" });
 	};
 
+	const animate = { width: !isDashboardOpen ? "100vw" : "calc(100vw - 300px)" };
 	// TODO: make aria-label more informant later on?
 	return (
-		<div className="bg-white dark:bg-grey-500 border-b border-grey-200 relative dark:border-grey-400 ">
+		<>
 			<motion.nav
+				initial={animate}
+				animate={animate}
 				transition={{ ease: "easeInOut", duration: 0.15 }}
-				layout
-				className={`bg-white items-center dark:bg-grey-500 sticky top-0 grid ${
+				className={`items-center grid bg-white dark:bg-grey-500 border-b border-grey-200 relative dark:border-grey-400 ${
 					!isDashboardOpen
-						? "grid-cols-[max-content,1fr,repeat(2,max-content)] w-screen left-0"
-						: "grid-cols-[1fr,repeat(2,max-content)] w-[calc(100vw-300px)] left-[300px]"
+						? "grid-cols-[max-content,1fr,repeat(2,max-content)] w-screen"
+						: "grid-cols-[1fr,repeat(2,max-content)] w-[calc(100vw-300px)]"
 				}  gap-6 px-6 pt-[22px] pb-7`}
 				aria-label="Add Task navigaton"
 			>
@@ -85,7 +92,6 @@ export const Nav: React.FC = () => {
 						<div ref={ref} className="relative">
 							<motion.button
 								onClick={() => setShowOptions(!showOptions)}
-								layout
 								className="px-2"
 							>
 								<img src="/options.svg" alt="" />
@@ -96,7 +102,10 @@ export const Nav: React.FC = () => {
 								show={showOptions}
 							>
 								{selectedBoard && (
-									<button className="text-left focus:outline-none border-b border-b-[transparent] focus:border-purple-600">
+									<button
+										onClick={() => setIsEditBoardOpen(true)}
+										className="text-left focus:outline-none border-b border-b-[transparent] focus:border-purple-600"
+									>
 										Edit Board
 									</button>
 								)}
@@ -120,6 +129,10 @@ export const Nav: React.FC = () => {
 				</AnimatePresence>
 			</motion.nav>
 
+			<Modal show={isEditBoardOpen} onClickedOutside={closeEditBoard}>
+				<EditBoard onModalClose={closeEditBoard} />
+			</Modal>
+
 			<ConfirmDelete
 				title="Delete this board?"
 				show={onConfirmDelete}
@@ -129,6 +142,6 @@ export const Nav: React.FC = () => {
 				Are you sure you want to delete the ‘Platform Launch’ board? This action
 				will remove all columns and tasks and cannot be reversed.
 			</ConfirmDelete>
-		</div>
+		</>
 	);
 };

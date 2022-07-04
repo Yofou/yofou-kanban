@@ -601,13 +601,16 @@ video {
   position: relative;
 }
 
-.sticky{
-  position: -webkit-sticky;
-  position: sticky;
-}
-
 .bottom-8{
   bottom: 2rem;
+}
+
+.top-full{
+  top: 100%;
+}
+
+.right-full{
+  right: 100%;
 }
 
 .top-0{
@@ -618,16 +621,8 @@ video {
   left: 0px;
 }
 
-.left-\[300px\]{
-  left: 300px;
-}
-
-.top-full{
-  top: 100%;
-}
-
-.right-full{
-  right: 100%;
+.z-10{
+  z-index: 10;
 }
 
 .mb-6{
@@ -752,9 +747,9 @@ video {
   grid-auto-flow: column;
 }
 
-.grid-cols-\[max-content\2c 1fr\]{
-  grid-template-columns: -webkit-max-content 1fr;
-  grid-template-columns: max-content 1fr;
+.grid-cols-\[max-content\2c calc\(100vw-300px\)\]{
+  grid-template-columns: -webkit-max-content calc(100vw - 300px);
+  grid-template-columns: max-content calc(100vw - 300px);
 }
 
 .grid-cols-1{
@@ -766,6 +761,11 @@ video {
   grid-template-columns: repeat(3,max-content);
 }
 
+.grid-cols-\[1fr\2c max-content\]{
+  grid-template-columns: 1fr -webkit-max-content;
+  grid-template-columns: 1fr max-content;
+}
+
 .grid-cols-\[max-content\2c 1fr\2c repeat\(2\2c max-content\)\]{
   grid-template-columns: -webkit-max-content 1fr repeat(2,-webkit-max-content);
   grid-template-columns: max-content 1fr repeat(2,max-content);
@@ -774,11 +774,6 @@ video {
 .grid-cols-\[1fr\2c repeat\(2\2c max-content\)\]{
   grid-template-columns: 1fr repeat(2,-webkit-max-content);
   grid-template-columns: 1fr repeat(2,max-content);
-}
-
-.grid-cols-\[1fr\2c max-content\]{
-  grid-template-columns: 1fr -webkit-max-content;
-  grid-template-columns: 1fr max-content;
 }
 
 .grid-cols-2{
@@ -848,12 +843,12 @@ video {
   gap: 1.25rem;
 }
 
-.gap-8{
-  gap: 2rem;
-}
-
 .gap-3{
   gap: 0.75rem;
+}
+
+.gap-8{
+  gap: 2rem;
 }
 
 .place-self-center{
@@ -868,8 +863,8 @@ video {
   overflow: hidden;
 }
 
-.whitespace-pre-wrap{
-  white-space: pre-wrap;
+.whitespace-nowrap{
+  white-space: nowrap;
 }
 
 .rounded-\[6px\]{
@@ -1070,6 +1065,10 @@ video {
   padding-right: 22px;
 }
 
+.pr-\[50px\]{
+  padding-right: 50px;
+}
+
 .pt-\[22px\]{
   padding-top: 22px;
 }
@@ -1217,6 +1216,10 @@ html,  body{
 .focus\:outline-none:focus{
   outline: 2px solid transparent;
   outline-offset: 2px;
+}
+
+.disabled\:opacity-50:disabled{
+  opacity: 0.5;
 }
 
 .dark .dark\:border-grey-400{

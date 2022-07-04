@@ -1,8 +1,7 @@
 import { Columns } from "@prisma/client";
 import { db } from "../server/db.server";
 
-export type AddColumn = Omit<Columns, "id">;
-export const addOne = (data: AddColumn) =>
+export const addOne = (data: Columns) =>
 	db.columns.create({
 		data,
 	});

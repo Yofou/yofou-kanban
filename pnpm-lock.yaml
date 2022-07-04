@@ -15,6 +15,7 @@ specifiers:
   argon2: ^0.28.5
   autoprefixer: ^10.4.7
   concurrently: ^7.2.2
+  embla-carousel-react: 7.0.0-rc01
   eslint: ^8.15.0
   framer-motion: ^6.3.16
   joi: ^17.6.0
@@ -50,6 +51,7 @@ devDependencies:
   argon2: 0.28.5
   autoprefixer: 10.4.7_postcss@8.4.14
   concurrently: 7.2.2
+  embla-carousel-react: 7.0.0-rc01_react@17.0.2
   eslint: 8.18.0
   joi: 17.6.0
   pastel-color: 1.0.3
@@ -3271,6 +3273,19 @@ packages:
 
   /electron-to-chromium/1.4.174:
     resolution: {integrity: sha512-JER+w+9MV2MBVFOXxP036bLlNOnzbYAWrWU8sNUwoOO69T3w4564WhM5H5atd8VVS8U4vpi0i0kdoYzm1NPQgQ==}
+    dev: true
+
+  /embla-carousel-react/7.0.0-rc01_react@17.0.2:
+    resolution: {integrity: sha512-PvgXEtMDzSIEVHOom35ZklEkbeamtEghXQ6ewlHR/qRznnK1udXJSxbZKZEDGRBZ/TMMMYgeKRwlbOxSDNmDKA==}
+    peerDependencies:
+      react: ^18.1.0
+    dependencies:
+      embla-carousel: 7.0.0-rc01
+      react: 17.0.2
+    dev: true
+
+  /embla-carousel/7.0.0-rc01:
+    resolution: {integrity: sha512-IBTSKcPw7u9K0zoLvsnWYsijKsI0msFqzNp6ASIthTXiMZNJNGQt8k0ax7KqUVinDZeNM07WPWqYsjrvUM/Epw==}
     dev: true
 
   /emoji-regex/8.0.0:

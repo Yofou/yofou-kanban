@@ -11,6 +11,7 @@ type ButtonProps = React.PropsWithChildren<{
 	theme: keyof typeof themeDict;
 	className?: string;
 	type?: "button" | "submit" | "reset" | undefined;
+	disable?: boolean;
 }>;
 export const Button: React.FC<ButtonProps> = ({
 	onClick,
@@ -18,12 +19,14 @@ export const Button: React.FC<ButtonProps> = ({
 	theme,
 	className = "",
 	type = "submit",
+	disable = false,
 }) => {
 	return (
 		<button
 			type={type}
-			className={`${themeDict[theme]} ${className} px-6 py-4 rounded-[9999px]`}
+			className={`${themeDict[theme]} ${className} disabled:opacity-50 px-6 py-4 rounded-[9999px]`}
 			onClick={onClick}
+			disabled={disable}
 		>
 			{children}
 		</button>

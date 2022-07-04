@@ -1,5 +1,5 @@
 import { useFetcher } from "@remix-run/react";
-import { useEffect } from "react";
+import { FormEventHandler, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "~/lib/store";
 import { Button } from "../shared/button";
@@ -16,15 +16,23 @@ export const AddColumn: React.FC<AddCoulmnProps> = ({ onSubmit }) => {
 		if (fetcher.type === "done" && fetcher.data === null) onSubmit();
 	}, [fetcher]);
 
+	const onDebounce: FormEventHandler<HTMLFormElement> = (e) => {
+		if (fetcher.state !== "idle") e.preventDefault();
+	};
+
 	return (
 		<>
 			<h2 className="text-heading-l text-grey-700 dark:text-white mb-6">
 				Add New Column
 			</h2>
 
-			<fetcher.Form method="post" action="/api/columns">
-				<Input>Column name</Input>
-				<Button className="w-full mt-4" theme="primaryS">
+			<fetcher.Form onSubmit={onDebounce} method="post" action="/api/columns">
+				<Input error={fetcher.data?.error?.["Column name"]}>Column name</Input>
+				<Button
+					disable={fetcher.state !== "idle"}
+					className="w-full mt-4"
+					theme="primaryS"
+				>
 					Confirm
 				</Button>
 
