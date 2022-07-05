@@ -27,24 +27,18 @@ export const getAllBoardTasks = async (userId: number) => {
 };
 
 export const getOne = async (userId: number, boardId: number) => {
-	return await db.boards.findFirst({
+	return db.boards.findFirst({
 		where: {
 			userId: userId,
 			id: boardId,
 		},
+
 		include: {
 			columns: {
 				include: {
 					task: {
-						select: {
-							id: true,
-							title: true,
-							description: true,
-							_count: {
-								select: {
-									subtasks: true,
-								},
-							},
+						include: {
+							subtasks: true,
 						},
 					},
 				},

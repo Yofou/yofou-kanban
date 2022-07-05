@@ -17,7 +17,9 @@ export const Modal: React.FC<ModalProps> = ({
 			if (e instanceof KeyboardEvent) onClickedOutside();
 			if (
 				e?.target instanceof HTMLImageElement ||
-				e?.target instanceof HTMLButtonElement
+				e?.target instanceof HTMLButtonElement ||
+				e?.target instanceof HTMLHeadingElement ||
+				e?.target instanceof HTMLParagraphElement
 			)
 				return;
 

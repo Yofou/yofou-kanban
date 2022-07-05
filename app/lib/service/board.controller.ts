@@ -4,6 +4,7 @@ import JoiToHumanError from "../JoiToHumanError";
 import { db } from "../server/db.server";
 import { getHex } from "pastel-color";
 import { getSession } from "~/cookies";
+import editBoardValidator from "~/validators/edit-board";
 
 export const post = async (request: Request) => {
 	const session = await getSession(request.headers.get("Cookie"));
@@ -13,6 +14,9 @@ export const post = async (request: Request) => {
 	type Body = { [key: string]: FormDataEntryValue | FormDataEntryValue[] };
 	const body: Body = Object.fromEntries(data);
 	body["columns-names"] = data.getAll("columns-names");
+	body["columns-id"] = data.getAll("columns-id");
+
+	console.log(body);
 
 	const validator = createBoard.validate(body);
 	if (validator?.error) {
@@ -78,6 +82,19 @@ export const put = async (request: Request) => {
 		name: names[index],
 		id: ids[index],
 	}));
+
+	const validator = editBoardValidator.validate({
+		...body,
+		"columns-id": ids,
+		"columns-names": names,
+	});
+
+	if (validator?.error) {
+		return json({
+			...validator,
+			error: JoiToHumanError(validator.error),
+		});
+	}
 
 	const updateAndDeleteBoard = db.$transaction([
 		db.columns.deleteMany({

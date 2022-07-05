@@ -10,6 +10,7 @@ import { useFetcher } from "@remix-run/react";
 import { ConfirmDelete } from "~/components/shared/confirm-delete";
 import { Modal } from "../shared/modal";
 import { EditBoard } from "../shared/edit-board";
+import { AddTask } from "./add-task";
 
 export const Nav: React.FC = () => {
 	const fetcher = useFetcher();
@@ -39,6 +40,8 @@ export const Nav: React.FC = () => {
 			{ method: "delete", action: "/api/boards" }
 		);
 	};
+
+	const [isAddingTask, setIsAddingTask] = useState(false);
 
 	const onSignOut = () => {
 		fetcher.submit(null, { method: "delete", action: "/api/session" });
@@ -87,7 +90,11 @@ export const Nav: React.FC = () => {
 							{selectedBoard?.title ?? "Select a board"}
 						</motion.h2>
 
-						{selectedBoard && <Button theme="primaryL">+ Add New Task</Button>}
+						{selectedBoard && (
+							<Button onClick={() => setIsAddingTask(true)} theme="primaryL">
+								+ Add New Task
+							</Button>
+						)}
 
 						<div ref={ref} className="relative">
 							<motion.button
@@ -132,6 +139,8 @@ export const Nav: React.FC = () => {
 			<Modal show={isEditBoardOpen} onClickedOutside={closeEditBoard}>
 				<EditBoard onModalClose={closeEditBoard} />
 			</Modal>
+
+			<AddTask show={isAddingTask} setShow={setIsAddingTask} />
 
 			<ConfirmDelete
 				title="Delete this board?"

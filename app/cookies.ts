@@ -6,6 +6,7 @@ export const theme = createCookie("theme", { maxAge: 60 * 60 * 24 * 30 * 12 });
 
 export const sessionId = createCookie("sessionId", {
 	maxAge: 60 * 60 * 24 * 30,
+	secrets: [process.env["COOKIE_SECRET"] ?? "this-should-be-never-selected"],
 });
 
 const sessionStorage = createSessionStorage({

@@ -11,7 +11,7 @@ export const Column: React.FC<ColumnProps> = ({
 }) => {
 	return (
 		<div>
-			<h2 className="text-heading-s flex gap-2 items-center text-grey-300">
+			<h2 className="text-heading-s mb-6 flex gap-2 items-center text-grey-300">
 				<div
 					className="w-[15px] h-[15px] rounded-full bg-[color:var(--color)]"
 					style={{ "--color": color } as any}

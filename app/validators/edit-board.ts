@@ -5,4 +5,5 @@ export default Joi.object({
 	"board-id": Joi.string().required(),
 	"columns-names": Joi.array().items(Joi.string()).required(),
 	"columns-id": Joi.array().items(Joi.string()).required(),
+	"removed-columns": Joi.array().items(Joi.string()).required(),
 });

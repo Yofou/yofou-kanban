@@ -45,12 +45,6 @@ model Columns {
 	boardId Int
 }
 
-enum Status {
-	Todo
-	Doing
-	Done
-}
-
 model Task {
 	id Int @id @default(autoincrement())
 	title String
@@ -59,12 +53,12 @@ model Task {
 	column Columns @relation(fields: [columnId], references: [id], onDelete: Cascade)
 	columnId String
 	subtasks SubTask[]
-	status Status
 }
 
 model SubTask {
 	id Int @id @default(autoincrement())
 	title String
+	isDone Boolean @default(false)
 
 	task Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
 	taskId Int

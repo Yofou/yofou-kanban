@@ -22,11 +22,11 @@ export const Input: React.FC<InputProps> = ({
 	className = "",
 }) => {
 	const [value, setValue] = useState(defaultValue);
-	const showError = error && defaultValue === value;
+	const showError = error && (defaultValue === value || value.length === 0);
 
 	return (
 		<label
-			className={`text-body-m flex flex-col gap-4 w-full text-grey-400 dark:text-white ${labelClassName}`}
+			className={`text-body-m flex flex-col gap-2 w-full text-grey-400 dark:text-white ${labelClassName}`}
 		>
 			{children} {showError && `- ${error}`}
 			<input
