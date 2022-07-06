@@ -66,7 +66,6 @@ const SignUp: React.FC = () => {
 	const errors = useActionData();
 	const dispatch = useDispatch();
 	useEffect(() => {
-		console.log(errors);
 		dispatch(setAuthTitle("sign up"));
 	}, []);
 

@@ -8,6 +8,10 @@
 	font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
+html, body, main {
+	@apply bg-grey-100 dark:bg-grey-600;
+}
+
 html, body {
-	@apply bg-grey-100 text-grey-300 dark:bg-grey-600 dark:text-grey-300 w-full h-full;
+	@apply bg-grey-100 text-grey-300 dark:bg-grey-600 dark:text-grey-300 w-full min-h-screen;
 }

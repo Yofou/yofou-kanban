@@ -1,5 +1,7 @@
-import { json } from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
+import { getSession } from "~/cookies";
 import addTaskValidator from "~/validators/add-task";
+import editTaskValidator from "~/validators/edit-task";
 import JoiToHumanError from "../JoiToHumanError";
 import { db } from "../server/db.server";
 
@@ -17,8 +19,6 @@ export const post = async (request: Request) => {
 		});
 	}
 
-	console.log(body);
-
 	await db.task.create({
 		data: {
 			title: body["Title"] as string,
@@ -35,6 +35,35 @@ export const post = async (request: Request) => {
 		},
 		include: {
 			subtasks: true,
+		},
+	});
+
+	return null;
+};
+
+export const put = async (request: Request) => {
+	const session = await getSession(request.headers.get("Cookie"));
+
+	if (session.id.length === 0) return redirect("/");
+	const data = await request.formData();
+	const body = Object.fromEntries(data);
+
+	const validator = editTaskValidator.validate(body);
+	if (validator.error) {
+		return json({
+			...validator,
+			error: JoiToHumanError(validator.error),
+		});
+	}
+
+	await db.task.update({
+		where: {
+			id: parseInt(body["task-id"] as string),
+		},
+		data: {
+			title: body["title"] as string | undefined,
+			description: body["description"] as string | undefined,
+			columnId: body["status"] as string | undefined,
 		},
 	});
 

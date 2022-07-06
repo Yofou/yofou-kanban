@@ -32,13 +32,16 @@ export const getOne = async (userId: number, boardId: number) => {
 			userId: userId,
 			id: boardId,
 		},
-
 		include: {
 			columns: {
 				include: {
 					task: {
 						include: {
-							subtasks: true,
+							subtasks: {
+								orderBy: {
+									id: "asc",
+								},
+							},
 						},
 					},
 				},

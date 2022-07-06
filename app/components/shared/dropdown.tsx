@@ -1,4 +1,4 @@
-import { ReactElement, useState } from "react";
+import { Dispatch, ReactElement, useState } from "react";
 import { useDetectClickOutside } from "react-detect-click-outside";
 import { DropdownDialog } from "./dropdown-dialog";
 
@@ -6,6 +6,8 @@ type DropdownProps<T> = {
 	options: T[];
 	keyResolver: (value: T) => string;
 	valueResolver: (value: T) => string;
+	findCurrentValue?: (value: T) => boolean;
+	bindSelected?: Dispatch<string>;
 	name?: string;
 };
 
@@ -14,6 +16,8 @@ export const Dropdown: Component = ({
 	options,
 	keyResolver,
 	valueResolver,
+	findCurrentValue,
+	bindSelected,
 	name = "",
 }) => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -23,9 +27,13 @@ export const Dropdown: Component = ({
 		},
 	});
 	const toggleOpen = () => setIsOpen(!isOpen);
-	const [selectedValue, setSelectedValue] = useState(options[0]);
+	const defaultValue = findCurrentValue
+		? options.find(findCurrentValue) ?? options[0]
+		: options[0];
+	const [selectedValue, setSelectedValue] = useState(defaultValue);
 	const onSelectOption = (value: typeof options[number]) => () => {
 		setSelectedValue(value);
+		if (bindSelected) bindSelected(valueResolver(value));
 		setIsOpen(false);
 	};
 

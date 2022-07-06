@@ -7,6 +7,7 @@ import { Column } from "./column";
 import useEmblaCarousel from "embla-carousel-react";
 import { Task } from "./task";
 import { SubTask, Task as TaskType } from "@prisma/client";
+import { InnerTask } from "./inner-task";
 
 export const Board: React.FC = () => {
 	const [ref, embla] = useEmblaCarousel({
@@ -27,6 +28,12 @@ export const Board: React.FC = () => {
 		setTimeout(() => {
 			embla?.reInit();
 		}, 250);
+
+		for (let column of selectedBoard?.columns ?? []) {
+			for (let task of column.task) {
+				if (task.id === selectedTask?.id) setSelectedTask(task);
+			}
+		}
 	}, [selectedBoard]);
 
 	return (
@@ -70,7 +77,7 @@ export const Board: React.FC = () => {
 				show={!!selectedTask}
 				onClickedOutside={() => setSelectedTask(null)}
 			>
-				<p>qwdqw</p>
+				{selectedTask && <InnerTask task={selectedTask} />}
 			</Modal>
 
 			<Modal show={show} onClickedOutside={() => setShow(false)}>

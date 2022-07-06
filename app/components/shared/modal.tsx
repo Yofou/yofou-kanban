@@ -38,7 +38,7 @@ export const Modal: React.FC<ModalProps> = ({
 				>
 					<div
 						ref={ref}
-						className={`place-self-center max-w-[480px] w-full rounded-[6px] p-8 bg-white dark:bg-grey-500 opacity-[calc(.5+var(--bg-opacity))] ${className}`}
+						className={`place-self-center relative max-w-[480px] w-full rounded-[6px] p-8 bg-white dark:bg-grey-500 opacity-[calc(.5+var(--bg-opacity))] ${className}`}
 					>
 						{children}
 					</div>

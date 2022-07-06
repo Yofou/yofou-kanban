@@ -16,8 +16,6 @@ export const post = async (request: Request) => {
 	body["columns-names"] = data.getAll("columns-names");
 	body["columns-id"] = data.getAll("columns-id");
 
-	console.log(body);
-
 	const validator = createBoard.validate(body);
 	if (validator?.error) {
 		return json({ ...validator, error: JoiToHumanError(validator.error) });
