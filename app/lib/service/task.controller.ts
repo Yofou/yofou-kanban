@@ -69,3 +69,18 @@ export const put = async (request: Request) => {
 
 	return null;
 };
+
+export const del = async (request: Request) => {
+	const session = await getSession(request.headers.get("Cookie"));
+
+	if (session.id.length === 0) return redirect("/");
+	const data = await request.formData();
+
+	await db.task.delete({
+		where: {
+			id: parseInt(data.get("task-id") as string),
+		},
+	});
+
+	return { delete: "ok" };
+};

@@ -32,7 +32,6 @@ const DashboardId: React.FC = () => {
 	useEffect(() => {
 		dispatch( selectBoard(data.board) )
 	}, [data])
-
 	
 	if (data.board.columns.length === 0) return <NoColumn/>
 	return <Board />

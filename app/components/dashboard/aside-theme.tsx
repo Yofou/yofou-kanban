@@ -20,7 +20,7 @@ export const AsideTheme: React.FC = () => {
 	return (
 		<div className="w-[calc(100%-50px)] grid grid-cols-[repeat(3,max-content)] gap-6 place-content-center place-self-center bg-grey-100 dark:bg-grey-600 rounded-[6px] py-[14px]">
 			<img src="/sun.svg" alt="light theme" />
-			<motion.button
+			<button
 				onClick={onClick}
 				className={`w-10 h-5 px-[3px] flex items-center ${
 					theme === "dark" ? "flex-row-reverse" : "flex-row"
@@ -39,7 +39,7 @@ export const AsideTheme: React.FC = () => {
 						className="w-[14px] h-[14px] rounded-full bg-white"
 					></motion.div>
 				)}
-			</motion.button>
+			</button>
 			<img src="/moon.svg" alt="dark theme" />
 		</div>
 	);

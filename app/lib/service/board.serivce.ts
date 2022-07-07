@@ -5,24 +5,6 @@ export const getAllBoardTasks = async (userId: number) => {
 		where: {
 			userId: userId,
 		},
-		include: {
-			columns: {
-				include: {
-					task: {
-						select: {
-							id: true,
-							title: true,
-							description: true,
-							_count: {
-								select: {
-									subtasks: true,
-								},
-							},
-						},
-					},
-				},
-			},
-		},
 	});
 };
 

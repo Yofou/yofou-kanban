@@ -36,7 +36,7 @@ const Dashboard: React.FC = () => {
 	);
 	return (
 		<div
-			className={`w-full h-full grid ${
+			className={`w-full min-h-screen h-full grid ${
 				isDashboardAsideOpen
 					? "grid-cols-[max-content,calc(100vw-300px)]"
 					: "grid-cols-1"

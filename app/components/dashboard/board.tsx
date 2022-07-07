@@ -77,7 +77,12 @@ export const Board: React.FC = () => {
 				show={!!selectedTask}
 				onClickedOutside={() => setSelectedTask(null)}
 			>
-				{selectedTask && <InnerTask task={selectedTask} />}
+				{selectedTask && (
+					<InnerTask
+						closeModel={() => setSelectedTask(null)}
+						task={selectedTask}
+					/>
+				)}
 			</Modal>
 
 			<Modal show={show} onClickedOutside={() => setShow(false)}>

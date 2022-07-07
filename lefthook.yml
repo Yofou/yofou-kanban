@@ -4,4 +4,4 @@ pre-commit:
     prettier:
       files: git diff --name-only @{push}
       glob: "*.{js,ts,jsx,tsx}"
-      run: npx prettier --write {files} && git add .
+      #  run: npx prettier --write {files} && git add .
