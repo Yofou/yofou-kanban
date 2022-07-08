@@ -1,4 +1,4 @@
-import { Columns } from "@prisma/client";
+import { Columns, Task } from "@prisma/client";
 import { FetcherWithComponents } from "@remix-run/react";
 import { Button } from "../shared/button";
 import { Dropdown } from "../shared/dropdown";
@@ -9,15 +9,18 @@ import { SubTasks } from "./add-task";
 type AddTaskInnerProps = {
 	title: string;
 	cta: string;
+	task: Task;
 	subtasks: SubTasks[];
 	columns: Columns[];
 	addSubtask: () => void;
 	removeSubtask: (id: string) => () => void;
 	fetcher: FetcherWithComponents<any>;
 };
+
 export const AddTaskInner: React.FC<AddTaskInnerProps> = ({
 	title,
 	cta,
+	task,
 	subtasks,
 	columns,
 	addSubtask,
@@ -30,8 +33,14 @@ export const AddTaskInner: React.FC<AddTaskInnerProps> = ({
 				{title}
 			</h2>
 
-			<Input error={fetcher.data?.error?.["Title"]}>Title</Input>
-			<TextArea error={fetcher.data?.error?.["Description"]} className="mt-6">
+			<Input defaultValue={task.title} error={fetcher.data?.error?.["Title"]}>
+				Title
+			</Input>
+			<TextArea
+				defaultValue={task.description}
+				error={fetcher.data?.error?.["Description"]}
+				className="mt-6"
+			>
 				Description
 			</TextArea>
 
@@ -39,14 +48,14 @@ export const AddTaskInner: React.FC<AddTaskInnerProps> = ({
 				<h3 className="text-body-m text-grey-700 dark:text-white mb-2">
 					Subtasks
 				</h3>
-				{subtasks.map((task) => {
+				{subtasks.map((sub) => {
 					return (
 						<div
-							key={task.id}
+							key={sub.id}
 							className="grid gap-4 grid-cols-[1fr,max-content] mb-3"
 						>
-							<Input name="sub-tasks" />
-							<button type="button" onClick={removeSubtask(task.id)}>
+							<Input defaultValue={sub.value} name="sub-tasks" />
+							<button type="button" onClick={removeSubtask(sub.id)}>
 								<img src="/board-close.svg" alt="delete subtask" />
 							</button>
 						</div>

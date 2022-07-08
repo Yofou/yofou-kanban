@@ -11,9 +11,14 @@ import { DropdownDialog } from "../shared/dropdown-dialog";
 type InnerTaskProps = {
 	task: Task & { subtasks: SubTask[] };
 	closeModel?: () => void;
+	openEditModel: () => void;
 };
 
-export const InnerTask: React.FC<InnerTaskProps> = ({ task, closeModel }) => {
+export const InnerTask: React.FC<InnerTaskProps> = ({
+	task,
+	closeModel,
+	openEditModel,
+}) => {
 	const [isTaskOptionsOpen, setIsTaskOptionsOpen] = useState(false);
 	const board = useSelector((state: RootState) => state.boards.selected);
 	const [selectedStatus, setSelectedStatus] = useState<string | null>(null);
@@ -119,7 +124,10 @@ export const InnerTask: React.FC<InnerTaskProps> = ({ task, closeModel }) => {
 						className="absolute top-[calc(100%+18px)] max-w-[190px] !w-screen left-1/2 transform -translate-x-1/2"
 						show={isTaskOptionsOpen}
 					>
-						<button className="text-left text-body-l text-grey-300">
+						<button
+							onClick={openEditModel}
+							className="text-left text-body-l text-grey-300"
+						>
 							Edit Task
 						</button>
 						<button

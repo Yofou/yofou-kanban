@@ -8,6 +8,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import { Task } from "./task";
 import { SubTask, Task as TaskType } from "@prisma/client";
 import { InnerTask } from "./inner-task";
+import { EditTask } from "./edit-task";
 
 export const Board: React.FC = () => {
 	const [ref, embla] = useEmblaCarousel({
@@ -20,6 +21,8 @@ export const Board: React.FC = () => {
 	>(null);
 	const [show, setShow] = useState(false);
 	const toggleShow = () => setShow(!show);
+	const [showEditTask, setShowEditTask] = useState(false);
+	const toggleEditShow = () => setShowEditTask(!setShowEditTask);
 	const selectedBoard = useSelector(
 		(state: RootState) => state.boards.selected
 	);
@@ -74,14 +77,26 @@ export const Board: React.FC = () => {
 			</div>
 
 			<Modal
-				show={!!selectedTask}
-				onClickedOutside={() => setSelectedTask(null)}
+				show={!!selectedTask && showEditTask === false}
+				onClickedOutside={() => {
+					if (showEditTask === false) setSelectedTask(null);
+				}}
 			>
 				{selectedTask && (
 					<InnerTask
+						openEditModel={() => setShowEditTask(true)}
 						closeModel={() => setSelectedTask(null)}
 						task={selectedTask}
 					/>
+				)}
+			</Modal>
+
+			<Modal
+				show={showEditTask}
+				onClickedOutside={() => setShowEditTask(false)}
+			>
+				{selectedTask && selectedBoard && (
+					<EditTask board={selectedBoard} task={selectedTask} />
 				)}
 			</Modal>
 
