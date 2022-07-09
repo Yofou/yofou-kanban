@@ -71,7 +71,7 @@ export const Aside: React.FC = () => {
 
 							<button
 								onClick={onCreateBoard}
-								className="text-left whitespace-nowrap flex gap-4 items-center pl-8 py-[15px] text-heading-m text-purple-600"
+								className="text-left whitespace-nowrap flex gap-4 items-center pl-8 py-[15px] text-heading-m text-purple-600 hover:text-purple-300 transition-colors"
 							>
 								<Fluent_board />+ Create New Board
 							</button>

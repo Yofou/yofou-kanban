@@ -4,8 +4,12 @@ import addTaskValidator from "~/validators/add-task";
 import editTaskValidator from "~/validators/edit-task";
 import JoiToHumanError from "../JoiToHumanError";
 import { db } from "../server/db.server";
+import { isBoardOwnerByColumnId } from "./task.service";
 
 export const post = async (request: Request) => {
+	const session = await getSession(request.headers.get("Cookie"));
+
+	if (session.id?.length === 0) return redirect("/");
 	type Body = { [key: string]: FormDataEntryValue | FormDataEntryValue[] };
 	const data = await request.formData();
 	const body: Body = Object.fromEntries(data);
@@ -19,6 +23,8 @@ export const post = async (request: Request) => {
 			error: JoiToHumanError(validator.error),
 		});
 	}
+
+	await isBoardOwnerByColumnId(session, body["status"] as string);
 
 	await db.task.create({
 		data: {
@@ -60,6 +66,8 @@ export const put = async (request: Request) => {
 			error: JoiToHumanError(validator.error),
 		});
 	}
+
+	await isBoardOwnerByColumnId(session, body["status"] as string);
 
 	await db.$transaction([
 		db.task.update({
@@ -106,6 +114,24 @@ export const del = async (request: Request) => {
 	if (session.id.length === 0) return redirect("/");
 	const data = await request.formData();
 
+	const isBoardOwner = await db.boards.findFirst({
+		where: {
+			userId: session.data?.user?.id,
+		},
+		include: {
+			columns: {
+				include: {
+					task: {
+						where: {
+							id: parseInt(data.get("task-id") as string),
+						},
+					},
+				},
+			},
+		},
+	});
+
+	if (!isBoardOwner) return redirect("/dashboard");
 	await db.task.delete({
 		where: {
 			id: parseInt(data.get("task-id") as string),
