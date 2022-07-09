@@ -22,7 +22,7 @@ export const AsideTheme: React.FC = () => {
 			<img src="/sun.svg" alt="light theme" />
 			<button
 				onClick={onClick}
-				className={`w-10 h-5 px-[3px] flex items-center ${
+				className={`w-10 hover:bg-purple-300 transition-colors h-5 px-[3px] flex items-center ${
 					theme === "dark" ? "flex-row-reverse" : "flex-row"
 				} rounded-full bg-purple-600`}
 			>
