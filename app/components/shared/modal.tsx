@@ -1,5 +1,7 @@
 import { useDetectClickOutside } from "react-detect-click-outside";
 import { AnimatePresence, motion } from "framer-motion";
+import { v4 } from "uuid";
+import { useEffect, useMemo } from "react";
 
 type ModalProps = React.PropsWithChildren<{
 	show: boolean;
@@ -12,9 +14,10 @@ export const Modal: React.FC<ModalProps> = ({
 	onClickedOutside,
 	show,
 }) => {
+	const uuid = useMemo(() => v4(), []);
 	const ref = useDetectClickOutside({
 		onTriggered: (e: Event) => {
-			if (e instanceof KeyboardEvent) onClickedOutside();
+			if (e instanceof KeyboardEvent) return onClickedOutside();
 			if (
 				e?.target instanceof HTMLImageElement ||
 				e?.target instanceof HTMLButtonElement ||
@@ -23,17 +26,19 @@ export const Modal: React.FC<ModalProps> = ({
 			)
 				return;
 
+			e.stopPropagation();
 			onClickedOutside();
 		},
 	});
 
 	return (
-		<AnimatePresence>
+		<AnimatePresence key={uuid} exitBeforeEnter>
 			{show && (
 				<motion.div
+					key={uuid}
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
-					exit={{ opacity: 0 }}
+					exit={{ opacity: 0, pointerEvents: "none" }}
 					className="fixed z-10 grid top-0 bg-grey-700/50 left-0 w-full h-full"
 				>
 					<div

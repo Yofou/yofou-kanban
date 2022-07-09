@@ -10,6 +10,7 @@ export const post = async (request: Request) => {
 	const data = await request.formData();
 	const body: Body = Object.fromEntries(data);
 	body["sub-tasks"] = data.getAll("sub-tasks");
+	body["sub-tasks-id"] = data.getAll("sub-tasks-id");
 
 	const validator = addTaskValidator.validate(body);
 	if (validator?.error) {
@@ -46,7 +47,11 @@ export const put = async (request: Request) => {
 
 	if (session.id.length === 0) return redirect("/");
 	const data = await request.formData();
-	const body = Object.fromEntries(data);
+	type Body = { [key: string]: FormDataEntryValue | FormDataEntryValue[] };
+	const body: Body = Object.fromEntries(data);
+	body["sub-tasks"] = data.getAll("sub-tasks");
+	body["sub-tasks-id"] = data.getAll("sub-tasks-id");
+	body["removed-sub-tasks"] = data.getAll("removed-sub-tasks");
 
 	const validator = editTaskValidator.validate(body);
 	if (validator.error) {
@@ -56,16 +61,41 @@ export const put = async (request: Request) => {
 		});
 	}
 
-	await db.task.update({
-		where: {
-			id: parseInt(body["task-id"] as string),
-		},
-		data: {
-			title: body["title"] as string | undefined,
-			description: body["description"] as string | undefined,
-			columnId: body["status"] as string | undefined,
-		},
-	});
+	await db.$transaction([
+		db.task.update({
+			where: {
+				id: parseInt(body["task-id"] as string),
+			},
+			data: {
+				title: body["Title"] as string | undefined,
+				description: body["Description"] as string | undefined,
+				columnId: body["status"] as string | undefined,
+			},
+		}),
+		db.subTask.deleteMany({
+			where: {
+				id: {
+					in: body["removed-sub-tasks"] as string[],
+				},
+			},
+		}),
+		...body["sub-tasks"].map((value, idIndex) => {
+			const id = (body["sub-tasks-id"] as string[])[idIndex];
+			return db.subTask.upsert({
+				where: {
+					id,
+				},
+				create: {
+					id,
+					taskId: parseInt(body["task-id"] as string),
+					title: value as string,
+				},
+				update: {
+					title: value as string,
+				},
+			});
+		}),
+	]);
 
 	return null;
 };

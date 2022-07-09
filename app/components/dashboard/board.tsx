@@ -22,7 +22,6 @@ export const Board: React.FC = () => {
 	const [show, setShow] = useState(false);
 	const toggleShow = () => setShow(!show);
 	const [showEditTask, setShowEditTask] = useState(false);
-	const toggleEditShow = () => setShowEditTask(!setShowEditTask);
 	const selectedBoard = useSelector(
 		(state: RootState) => state.boards.selected
 	);
@@ -96,7 +95,11 @@ export const Board: React.FC = () => {
 				onClickedOutside={() => setShowEditTask(false)}
 			>
 				{selectedTask && selectedBoard && (
-					<EditTask board={selectedBoard} task={selectedTask} />
+					<EditTask
+						board={selectedBoard}
+						task={selectedTask}
+						closeModal={() => setShowEditTask(false)}
+					/>
 				)}
 			</Modal>
 

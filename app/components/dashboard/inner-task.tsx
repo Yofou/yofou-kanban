@@ -65,7 +65,7 @@ export const InnerTask: React.FC<InnerTaskProps> = ({
 	}, [fetcher]);
 
 	return (
-		<>
+		<div>
 			<h2 className="text-heading-l text-grey-700 mb-6 dark:text-white">
 				{task.title}
 			</h2>
@@ -139,6 +139,6 @@ export const InnerTask: React.FC<InnerTaskProps> = ({
 					</DropdownDialog>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 };

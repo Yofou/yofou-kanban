@@ -1,5 +1,5 @@
 import { useFetcher } from "@remix-run/react";
-import { Dispatch, useEffect, useState } from "react";
+import { Dispatch, useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { v4 } from "uuid";
 import { RootState } from "~/lib/store";
@@ -16,6 +16,7 @@ type AddTaskProps = {
 	setShow: Dispatch<boolean>;
 };
 export const AddTask: React.FC<AddTaskProps> = ({ show, setShow }) => {
+	const uuid = useMemo(() => v4(), []);
 	const fetcher = useFetcher();
 	const columns = useSelector(
 		(state: RootState) => state.boards.selected?.columns
@@ -30,7 +31,6 @@ export const AddTask: React.FC<AddTaskProps> = ({ show, setShow }) => {
 
 	const removeSubTask = (id: string) => () => {
 		if (subtasks.length === 1) return;
-
 		setSubtasks(subtasks.filter((task) => task.id !== id));
 	};
 
@@ -39,7 +39,7 @@ export const AddTask: React.FC<AddTaskProps> = ({ show, setShow }) => {
 	}, [fetcher]);
 
 	return (
-		<Modal show={show} onClickedOutside={() => setShow(false)}>
+		<Modal key={uuid} show={show} onClickedOutside={() => setShow(false)}>
 			<fetcher.Form method="post" action="/api/tasks">
 				<AddTaskInner
 					fetcher={fetcher}

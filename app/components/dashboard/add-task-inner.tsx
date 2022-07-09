@@ -9,7 +9,7 @@ import { SubTasks } from "./add-task";
 type AddTaskInnerProps = {
 	title: string;
 	cta: string;
-	task: Task;
+	task?: Task;
 	subtasks: SubTasks[];
 	columns: Columns[];
 	addSubtask: () => void;
@@ -33,11 +33,14 @@ export const AddTaskInner: React.FC<AddTaskInnerProps> = ({
 				{title}
 			</h2>
 
-			<Input defaultValue={task.title} error={fetcher.data?.error?.["Title"]}>
+			<Input
+				defaultValue={task?.title ?? ""}
+				error={fetcher.data?.error?.["Title"]}
+			>
 				Title
 			</Input>
 			<TextArea
-				defaultValue={task.description}
+				defaultValue={task?.description ?? ""}
 				error={fetcher.data?.error?.["Description"]}
 				className="mt-6"
 			>
@@ -46,7 +49,7 @@ export const AddTaskInner: React.FC<AddTaskInnerProps> = ({
 
 			<fieldset className="mt-6">
 				<h3 className="text-body-m text-grey-700 dark:text-white mb-2">
-					Subtasks
+					Subtasks {fetcher.data?.error?.["sub-tasks"] && "- boop"}
 				</h3>
 				{subtasks.map((sub) => {
 					return (
@@ -54,6 +57,13 @@ export const AddTaskInner: React.FC<AddTaskInnerProps> = ({
 							key={sub.id}
 							className="grid gap-4 grid-cols-[1fr,max-content] mb-3"
 						>
+							<input
+								readOnly
+								value={sub.id}
+								className="hidden"
+								name="sub-tasks-id"
+								type="text"
+							/>
 							<Input defaultValue={sub.value} name="sub-tasks" />
 							<button type="button" onClick={removeSubtask(sub.id)}>
 								<img src="/board-close.svg" alt="delete subtask" />
@@ -81,10 +91,14 @@ export const AddTaskInner: React.FC<AddTaskInnerProps> = ({
 					name="status"
 					keyResolver={(column) => column.title}
 					valueResolver={(column) => column.id}
+					findCurrentValue={
+						task ? (column) => column.id === task.columnId : undefined
+					}
 				/>
 			</fieldset>
 
 			<Button
+				type="submit"
 				className="w-full mt-6 disabled:opacity-50"
 				disable={fetcher.state !== "idle"}
 				theme="primaryS"

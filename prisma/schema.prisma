@@ -56,7 +56,7 @@ model Task {
 }
 
 model SubTask {
-	id Int @id @default(autoincrement())
+	id String @id @default(uuid())
 	title String
 	isDone Boolean @default(false)
 
