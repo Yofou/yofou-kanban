@@ -685,8 +685,8 @@ video {
   margin-bottom: 1.25rem;
 }
 
-.mt-5{
-  margin-top: 1.25rem;
+.mt-2{
+  margin-top: 0.5rem;
 }
 
 .mb-4{
@@ -1350,15 +1350,6 @@ html,  body{
 .hover\:text-purple-300:hover{
   --tw-text-opacity: 1;
   color: rgb(168 164 255 / var(--tw-text-opacity));
-}
-
-.hover\:\!text-purple-300:hover{
-  --tw-text-opacity: 1 !important;
-  color: rgb(168 164 255 / var(--tw-text-opacity)) !important;
-}
-
-.hover\:text-purple-600\/10:hover{
-  color: rgb(99 95 199 / 0.1);
 }
 
 .hover\:line-through:hover{

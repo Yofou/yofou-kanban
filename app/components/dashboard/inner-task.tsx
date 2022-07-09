@@ -114,7 +114,7 @@ export const InnerTask: React.FC<InnerTaskProps> = ({
 			</div>
 
 			<div className="absolute top-8 right-8">
-				<div ref={ref} className="relative">
+				<div ref={ref} aria-expanded={isTaskOptionsOpen} className="relative">
 					<button
 						onClick={() => setIsTaskOptionsOpen(!isTaskOptionsOpen)}
 						className=""

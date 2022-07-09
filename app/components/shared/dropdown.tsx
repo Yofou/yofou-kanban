@@ -47,9 +47,10 @@ export const Dropdown: Component = ({
 				value={valueResolver(selectedValue)}
 				type="text"
 			/>
-			<div ref={ref} className="w-full relative">
+			<div ref={ref} aria-expanded={isOpen} className="w-full relative">
 				<button
 					type="button"
+					aria-live="polite"
 					onClick={toggleOpen}
 					className={`w-full text-body-l flex justify-between items-center py-2 px-4 rounded-[4px] text-grey-700 dark:text-white border ${
 						isOpen ? "border-purple-600" : "border-[#828FA3]/25"

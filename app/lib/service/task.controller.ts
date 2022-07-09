@@ -80,13 +80,6 @@ export const put = async (request: Request) => {
 				columnId: body["status"] as string | undefined,
 			},
 		}),
-		db.subTask.deleteMany({
-			where: {
-				id: {
-					in: body["removed-sub-tasks"] as string[],
-				},
-			},
-		}),
 		...body["sub-tasks"].map((value, idIndex) => {
 			const id = (body["sub-tasks-id"] as string[])[idIndex];
 			return db.subTask.upsert({
@@ -104,6 +97,16 @@ export const put = async (request: Request) => {
 			});
 		}),
 	]);
+
+	if (body["removed-sub-tasks"]?.length > 0) {
+		await db.subTask.deleteMany({
+			where: {
+				id: {
+					in: body["removed-sub-tasks"] as string[],
+				},
+			},
+		});
+	}
 
 	return null;
 };

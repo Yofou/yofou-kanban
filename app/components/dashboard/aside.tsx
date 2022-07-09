@@ -81,7 +81,7 @@ export const Aside: React.FC = () => {
 
 						<button
 							onClick={onToggleSideBar}
-							className="text-grey-300 hover:text-purple-600 hover:bg-purple-600/10 dark:hover:bg-white transition-colors pl-8 mr-6 rounded-r-full mt-5 text-left flex gap-4 py-[15px] text-heading-m"
+							className="text-grey-300 hover:text-purple-600 hover:bg-purple-600/10 dark:hover:bg-white transition-colors pl-8 mr-6 rounded-r-full mt-2 text-left flex gap-4 py-[15px] text-heading-m"
 						>
 							<img src="/close-eye.svg" alt="Eye shut" />
 							Hide Sidebar

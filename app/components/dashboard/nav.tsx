@@ -48,7 +48,6 @@ export const Nav: React.FC = () => {
 	};
 
 	const animate = { width: !isDashboardOpen ? "100vw" : "calc(100vw - 300px)" };
-	// TODO: make aria-label more informant later on?
 	return (
 		<>
 			<motion.nav
@@ -60,7 +59,12 @@ export const Nav: React.FC = () => {
 						? "grid-cols-[max-content,1fr,repeat(2,max-content)] w-screen"
 						: "grid-cols-[1fr,repeat(2,max-content)] w-[calc(100vw-300px)]"
 				}  gap-6 px-6 pt-[22px] pb-7`}
-				aria-label="Add Task navigaton"
+				aria-label={`${
+					(selectedBoard?.title ?? "") +
+					(selectedBoard?.title?.toLowerCase()?.includes("board")
+						? ""
+						: " board")
+				} navigaton`}
 			>
 				<AnimatePresence exitBeforeEnter>
 					<>
@@ -96,7 +100,7 @@ export const Nav: React.FC = () => {
 							</Button>
 						)}
 
-						<div ref={ref} className="relative">
+						<div ref={ref} aria-expanded={showOptions} className="relative">
 							<motion.button
 								onClick={() => setShowOptions(!showOptions)}
 								className="px-2"
