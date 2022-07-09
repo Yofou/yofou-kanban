@@ -71,32 +71,34 @@ export const InnerTask: React.FC<InnerTaskProps> = ({
 			</h2>
 			<p className="text-body-l text-grey-300 mb-6">{task.description}</p>
 
-			<div className="mb-6">
-				<h3 className="mb-4 text-body-m text-white">
-					Subtasks ({doneSubTasks} of {task.subtasks.length})
-				</h3>
-				<div className="flex flex-col gap-2">
-					{task.subtasks.map((subtask) => (
-						<CheckBox
-							onClick={() => {
-								fetcher.submit(
-									{
-										"subtask-id": subtask.id.toString(),
-									},
-									{
-										method: "put",
-										action: "/api/subtasks",
-									}
-								);
-							}}
-							key={subtask.id}
-							isChecked={subtask.isDone}
-						>
-							{subtask.title}
-						</CheckBox>
-					))}
+			{task.subtasks.length > 0 && (
+				<div className="mb-6">
+					<h3 className="mb-4 text-body-m text-grey-300 dark:text-white">
+						Subtasks ({doneSubTasks} of {task.subtasks.length})
+					</h3>
+					<div className="flex flex-col gap-2">
+						{task.subtasks.map((subtask) => (
+							<CheckBox
+								onClick={() => {
+									fetcher.submit(
+										{
+											"subtask-id": subtask.id.toString(),
+										},
+										{
+											method: "put",
+											action: "/api/subtasks",
+										}
+									);
+								}}
+								key={subtask.id}
+								isChecked={subtask.isDone}
+							>
+								{subtask.title}
+							</CheckBox>
+						))}
+					</div>
 				</div>
-			</div>
+			)}
 
 			<div>
 				<h3 className="text-body-m text-grey-300 dark:text-white mb-2">
@@ -126,13 +128,13 @@ export const InnerTask: React.FC<InnerTaskProps> = ({
 					>
 						<button
 							onClick={openEditModel}
-							className="text-left text-body-l text-grey-300"
+							className="text-left text-body-l text-grey-300 focus:outline-none border-b border-b-[transparent] focus:border-purple-600"
 						>
 							Edit Task
 						</button>
 						<button
 							onClick={deleteTask}
-							className="text-left text-body-l text-red-600"
+							className="text-left text-body-l text-red-600 focus:outline-none border-b border-b-[transparent] focus:border-red-600"
 						>
 							Delete Task
 						</button>

@@ -19,7 +19,7 @@ export const TextArea: React.FC<TextAreaProps> = ({
 
 	return (
 		<label
-			className={`flex flex-col gap-2 text-white text-body-m ${className}`}
+			className={`flex flex-col gap-2 text-grey-300 dark:text-white text-body-m ${className}`}
 		>
 			{children} {showError && `- ${error}`}
 			<textarea

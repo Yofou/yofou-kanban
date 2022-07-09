@@ -17,12 +17,13 @@ export const Modal: React.FC<ModalProps> = ({
 	const uuid = useMemo(() => v4(), []);
 	const ref = useDetectClickOutside({
 		onTriggered: (e: Event) => {
-			if (e instanceof KeyboardEvent) return onClickedOutside();
+			if (e instanceof KeyboardEvent) onClickedOutside();
 			if (
 				e?.target instanceof HTMLImageElement ||
 				e?.target instanceof HTMLButtonElement ||
 				e?.target instanceof HTMLHeadingElement ||
-				e?.target instanceof HTMLParagraphElement
+				e?.target instanceof HTMLParagraphElement ||
+				e?.target instanceof SVGElement
 			)
 				return;
 

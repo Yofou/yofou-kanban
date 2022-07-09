@@ -20,7 +20,7 @@ export const CheckBox: React.FC<CheckBoxType> = ({
 		<button
 			type="button"
 			onClick={handleChecked}
-			className={`grid grid-cols-[max-content,1fr] gap-4 text-body-m text-grey-700 dark:text-white p-3 bg-grey-100 dark:bg-grey-600 w-full text-left items-center rounded-[4px]`}
+			className={`grid grid-cols-[max-content,1fr] gap-4 text-body-m text-grey-700 dark:text-white p-3 bg-grey-100 dark:bg-grey-600 hover:!bg-purple-600/25 transition-colors w-full text-left items-center rounded-[4px]`}
 		>
 			<div
 				className={`w-4 h-4 rounded-[2px] border grid place-content-center ${

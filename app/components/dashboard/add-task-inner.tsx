@@ -1,5 +1,6 @@
 import { Columns, Task } from "@prisma/client";
 import { FetcherWithComponents } from "@remix-run/react";
+import DeleteIcon from "../icon/delete-icon";
 import { Button } from "../shared/button";
 import { Dropdown } from "../shared/dropdown";
 import { Input } from "../shared/input";
@@ -48,7 +49,7 @@ export const AddTaskInner: React.FC<AddTaskInnerProps> = ({
 			</TextArea>
 
 			<fieldset className="mt-6">
-				<h3 className="text-body-m text-grey-700 dark:text-white mb-2">
+				<h3 className="text-body-m text-grey-300 dark:text-white mb-2">
 					Subtasks {fetcher.data?.error?.["sub-tasks"] && "- boop"}
 				</h3>
 				{subtasks.map((sub) => {
@@ -65,8 +66,12 @@ export const AddTaskInner: React.FC<AddTaskInnerProps> = ({
 								type="text"
 							/>
 							<Input defaultValue={sub.value} name="sub-tasks" />
-							<button type="button" onClick={removeSubtask(sub.id)}>
-								<img src="/board-close.svg" alt="delete subtask" />
+							<button
+								className="text-grey-300 hover:text-red-600 transition-colors"
+								type="button"
+								onClick={removeSubtask(sub.id)}
+							>
+								<DeleteIcon />
 							</button>
 						</div>
 					);

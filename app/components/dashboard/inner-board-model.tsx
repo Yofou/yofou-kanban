@@ -1,4 +1,5 @@
 import { FetcherWithComponents } from "@remix-run/react";
+import DeleteIcon from "../icon/delete-icon";
 import { Column } from "../shared/add-board";
 import { Button } from "../shared/button";
 import { Input } from "../shared/input";
@@ -59,8 +60,12 @@ export const InnerBoardModel: React.FC<InnerBoardModelProps> = ({
 								/>
 								<Input name="columns-names" defaultValue={item.value} />
 							</div>
-							<button type="button" onClick={removeColumn(item.id)}>
-								<img src="/board-close.svg" />
+							<button
+								type="button"
+								className="text-grey-300 hover:text-red-600 transition-colors"
+								onClick={removeColumn(item.id)}
+							>
+								<DeleteIcon />
 							</button>
 						</div>
 					);

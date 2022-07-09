@@ -22,7 +22,8 @@ export const Dropdown: Component = ({
 }) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const ref = useDetectClickOutside({
-		onTriggered: () => {
+		onTriggered: (e) => {
+			e.stopPropagation();
 			setIsOpen(false);
 		},
 	});

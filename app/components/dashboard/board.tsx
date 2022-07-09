@@ -68,7 +68,7 @@ export const Board: React.FC = () => {
 					})}
 					<button
 						onClick={toggleShow}
-						className="bg-gradient-to-b rounded-[6px] from-[#E9EFFA] to-[#E9EFFA]/50 dark:from-grey-500 dark:to-grey-500/50 text-grey-300 text-heading-xl"
+						className="bg-gradient-to-b rounded-[6px] from-[#E9EFFA] to-[#E9EFFA]/50 dark:from-grey-500 dark:to-grey-500/50 text-grey-300 hover:text-purple-600 transition-colors text-heading-xl"
 					>
 						+ New Columnm
 					</button>
