@@ -10,37 +10,37 @@
     "start": "remix-serve build"
   },
   "dependencies": {
+    "@prisma/client": "^4.0.0",
+    "@reduxjs/toolkit": "^1.8.3",
     "@remix-run/node": "^1.6.3",
     "@remix-run/react": "^1.6.3",
     "@remix-run/serve": "^1.6.3",
+    "argon2": "^0.28.7",
+    "autoprefixer": "^10.4.7",
+    "embla-carousel-react": "7.0.0-rc04",
     "framer-motion": "^6.3.16",
+    "joi": "^17.6.0",
+    "pastel-color": "^1.0.3",
+    "prisma": "^4.0.0",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-detect-click-outside": "^1.1.7",
+    "react-dom": "^17.0.2",
+    "react-redux": "^8.0.2",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@evilmartians/lefthook": "^1.0.4",
-    "@prisma/client": "^4.0.0",
-    "@reduxjs/toolkit": "^1.8.3",
     "@remix-run/dev": "^1.6.3",
     "@remix-run/eslint-config": "^1.6.3",
     "@types/react": "^17.0.45",
     "@types/react-dom": "^17.0.17",
     "@types/uuid": "^8.3.4",
-    "argon2": "^0.28.5",
-    "autoprefixer": "^10.4.7",
     "concurrently": "^7.2.2",
-    "embla-carousel-react": "7.0.0-rc01",
     "eslint": "^8.15.0",
-    "joi": "^17.6.0",
-    "pastel-color": "^1.0.3",
     "postcss": "^8.4.14",
     "prettier": "2.7.1",
-    "prisma": "^4.0.0",
-    "react-detect-click-outside": "^1.1.7",
-    "react-redux": "^8.0.2",
     "tailwindcss": "^3.1.4",
-    "typescript": "^4.6.4",
-    "uuid": "^8.3.2"
+    "typescript": "^4.6.4"
   },
   "engines": {
     "node": ">=14"

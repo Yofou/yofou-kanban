@@ -47,17 +47,14 @@ export const Nav: React.FC = () => {
 		fetcher.submit(null, { method: "delete", action: "/api/session" });
 	};
 
-	const animate = { width: !isDashboardOpen ? "100vw" : "calc(100vw - 300px)" };
 	return (
 		<>
 			<motion.nav
-				initial={animate}
-				animate={animate}
-				transition={{ ease: "easeInOut", duration: 0.15 }}
-				className={`items-center grid bg-white dark:bg-grey-500 border-b border-grey-200 relative dark:border-grey-400 ${
+				transition={{ ease: "easeInOut", duration: 0 }}
+				className={`items-center grid bg-white dark:bg-grey-500 border-b w-full border-grey-200 relative dark:border-grey-400 ${
 					!isDashboardOpen
-						? "grid-cols-[max-content,1fr,repeat(2,max-content)] w-screen"
-						: "grid-cols-[1fr,repeat(2,max-content)] w-[calc(100vw-300px)]"
+						? "grid-cols-[max-content,1fr,repeat(2,max-content)]"
+						: "grid-cols-[1fr,repeat(2,max-content)]"
 				}  gap-6 px-6 pt-[22px] pb-7`}
 				aria-label={`${
 					(selectedBoard?.title ?? "") +

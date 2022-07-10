@@ -6,6 +6,7 @@ import { Dropdown } from "../shared/dropdown";
 import { Input } from "../shared/input";
 import { TextArea } from "../shared/text-area";
 import { SubTasks } from "./add-task";
+import React from "react";
 
 type AddTaskInnerProps = {
 	title: string;
@@ -74,6 +75,19 @@ export const AddTaskInner: React.FC<AddTaskInnerProps> = ({
 								<DeleteIcon />
 							</button>
 						</div>
+					);
+				})}
+
+				{subtasks.map((sub, index) => {
+					if (!fetcher.data?.error?.[index])
+						return <React.Fragment key={`${sub.id}_error`}></React.Fragment>;
+					return (
+						<p
+							className="text-body-m text-red-600 my-2"
+							key={`${sub.id}_error`}
+						>
+							{fetcher.data?.error?.[index]}
+						</p>
 					);
 				})}
 

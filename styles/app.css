@@ -1,8 +1,30 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  src: url("/Plus_Jakarta_Sans/static/PlusJakartaSans-Regular.ttf") format("truetype"),
+       url("/Plus_Jakarta_Sans/static/PlusJakartaSans-Regular.ttf") format("truetype");
+	
+	font-weight: 100 400;
+}
+
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  src: url("/Plus_Jakarta_Sans/static/PlusJakartaSans-Medium.ttf") format("truetype"),
+       url("/Plus_Jakarta_Sans/static/PlusJakartaSans-Medium.ttf") format("truetype");
+	
+	font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  src: url("/Plus_Jakarta_Sans/static/PlusJakartaSans-Bold.ttf") format("truetype"),
+       url("/Plus_Jakarta_Sans/static/PlusJakartaSans-Bold.ttf") format("truetype");
+	
+	font-weight: 700;
+}
 
 * {
 	font-family: 'Plus Jakarta Sans', sans-serif;
@@ -14,4 +36,8 @@ html, body, main {
 
 html, body {
 	@apply bg-grey-100 text-grey-300 dark:bg-grey-600 dark:text-grey-300 w-full min-h-screen;
+}
+
+body {
+	@apply overflow-hidden;
 }

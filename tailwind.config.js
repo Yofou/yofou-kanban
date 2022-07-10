@@ -56,7 +56,7 @@ module.exports = {
 					lineHeight: "15px",
 				},
 				".text-body-l": {
-					fontWeight: "medium",
+					fontWeight: "500",
 					fontSize: "0.8125rem",
 					lineHeight: "23px",
 				},

@@ -31,16 +31,9 @@ const Dashboard: React.FC = () => {
 		dispatch(setBoards(data.boards));
 	}, [data]);
 
-	const isDashboardAsideOpen = useSelector(
-		(state: RootState) => state.dashboardAside.staggered
-	);
 	return (
 		<div
-			className={`w-full min-h-screen h-full grid ${
-				isDashboardAsideOpen
-					? "grid-cols-[max-content,calc(100vw-300px)]"
-					: "grid-cols-1"
-			}`}
+			className={`w-full min-h-screen h-full grid grid-cols-[max-content,1fr]`}
 		>
 			<Aside />
 			<main className="w-full grid grid-rows-[max-content,1fr]">
