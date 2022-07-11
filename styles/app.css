@@ -39,5 +39,5 @@ html, body {
 }
 
 body {
-	@apply overflow-hidden;
+	@apply overflow-x-hidden;
 }

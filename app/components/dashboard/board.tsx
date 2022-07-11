@@ -38,6 +38,19 @@ export const Board: React.FC = () => {
 		}
 	}, [selectedBoard]);
 
+	useEffect(() => {
+		let timeoutId: number;
+		const onResize = () => {
+			if (timeoutId) clearTimeout(timeoutId);
+			timeoutId = window.setTimeout(() => {
+				embla?.reInit();
+			}, 250);
+		};
+
+		window.addEventListener("resize", onResize);
+		return () => window.removeEventListener("resize", onResize);
+	}, [embla]);
+
 	return (
 		<>
 			<div className="overflow-hidden w-full h-full pr-[50px]" ref={ref}>

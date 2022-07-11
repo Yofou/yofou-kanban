@@ -54,8 +54,8 @@ export const Nav: React.FC = () => {
 				className={`items-center grid bg-white dark:bg-grey-500 border-b w-full border-grey-200 relative dark:border-grey-400 ${
 					!isDashboardOpen
 						? "grid-cols-[max-content,1fr,repeat(2,max-content)]"
-						: "grid-cols-[1fr,repeat(2,max-content)]"
-				}  gap-6 px-6 pt-[22px] pb-7`}
+						: "grid-cols-[max-content,1fr,repeat(2,max-content)] sm:grid-cols-[1fr,repeat(2,max-content)]"
+				}  gap-4 sm:gap-6 px-6 pt-[22px] pb-7`}
 				aria-label={`${
 					(selectedBoard?.title ?? "") +
 					(selectedBoard?.title?.toLowerCase()?.includes("board")
@@ -75,29 +75,41 @@ export const Nav: React.FC = () => {
 								animate={{ opacity: 1 }}
 								exit={{ opacity: 0 }}
 								layout
-								className="text-grey-700 dark:text-white"
+								className="hidden sm:block text-grey-700 dark:text-white"
 							>
 								<Logo />
 							</motion.div>
 						)}
+
+						<img className="w-6 h-6 block sm:hidden" src="/logo.svg" alt="" />
+
 						<motion.h2
 							transition={{
 								easings: "ease-in-out",
 								duration: 0.15,
 							}}
 							layout
-							className="text-heading-xl text-grey-700 dark:text-white"
+							className="text-heading-l sm:text-heading-xl text-grey-700 dark:text-white"
 						>
 							{selectedBoard?.title ?? "Select a board"}
 						</motion.h2>
 
 						{selectedBoard && (
-							<Button onClick={() => setIsAddingTask(true)} theme="primaryL">
-								+ Add New Task
+							<Button
+								className="grid px-[18px] py-[10px] sm:px-6 sm:py-4 place-content-center sm:block"
+								onClick={() => setIsAddingTask(true)}
+								theme="primaryL"
+							>
+								<p className="hidden sm:contents">+ Add New Task</p>
+								<img className="inline sm:hidden" src="/+.svg" alt="" />
 							</Button>
 						)}
 
-						<div ref={ref} aria-expanded={showOptions} className="relative">
+						<div
+							ref={ref}
+							aria-expanded={showOptions}
+							className="relative grid place-content-center"
+						>
 							<motion.button
 								onClick={() => setShowOptions(!showOptions)}
 								className="px-2"

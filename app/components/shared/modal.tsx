@@ -40,7 +40,7 @@ export const Modal: React.FC<ModalProps> = ({
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					exit={{ opacity: 0, pointerEvents: "none" }}
-					className="fixed z-10 grid top-0 bg-grey-700/50 left-0 w-full h-full"
+					className="px-4 fixed z-10 grid top-0 bg-grey-700/50 left-0 w-full h-full"
 				>
 					<div
 						ref={ref}

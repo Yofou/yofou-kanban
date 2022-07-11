@@ -2,12 +2,11 @@ import { json, LoaderFunction, redirect } from "@remix-run/node";
 import { Outlet, useLoaderData } from "@remix-run/react";
 import { LayoutGroup } from "framer-motion";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Aside } from "~/components/dashboard/aside";
 import { Nav } from "~/components/dashboard/nav";
 import { getSession } from "~/cookies";
 import { getAllBoardTasks } from "~/lib/service/board.serivce";
-import { RootState } from "~/lib/store";
 import { set as setBoards } from "~/lib/store/boards-slice";
 import { set as setUser } from "~/lib/store/user-slice";
 
@@ -33,7 +32,7 @@ const Dashboard: React.FC = () => {
 
 	return (
 		<div
-			className={`w-full min-h-screen h-full grid grid-cols-[max-content,1fr]`}
+			className={`w-full min-h-screen h-full grid grid-cols-1 sm:grid-cols-[max-content,1fr]`}
 		>
 			<Aside />
 			<main className="w-full grid grid-rows-[max-content,1fr]">

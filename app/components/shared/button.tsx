@@ -24,7 +24,7 @@ export const Button: React.FC<ButtonProps> = ({
 	return (
 		<button
 			type={type}
-			className={`${themeDict[theme]} ${className} disabled:opacity-50o transition-colors px-6 py-4 rounded-[9999px]`}
+			className={`${themeDict[theme]} ${className} disabled:opacity-50 transition-colors px-6 py-4 rounded-[9999px]`}
 			onClick={onClick}
 			disabled={disable}
 		>
