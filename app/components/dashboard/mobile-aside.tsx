@@ -35,7 +35,7 @@ export const MobileAside: React.FC<MobileAsideProps> = ({
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					exit={{ opacity: 0 }}
-					className="hidden fixed z-20 w-screen min-h-screen bg-grey-700/50"
+					className="fixed sm:hidden z-20 w-screen min-h-screen bg-grey-700/50"
 				>
 					<div ref={clickOutside} className="w-full h-full relative">
 						<div className="text-white p-4 shadow-task-shadow bg-white dark:bg-grey-500 rounded-[8px] max-w-[264px] w-full absolute top-20 left-1/2 -translate-x-1/2">

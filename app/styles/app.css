@@ -1523,6 +1523,10 @@ body {
 }
 
 @media (min-width: 640px) {
+  .sm\:fixed {
+    position: fixed;
+  }
+
   .sm\:block {
     display: block;
   }
