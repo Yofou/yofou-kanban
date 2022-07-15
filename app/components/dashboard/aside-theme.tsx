@@ -27,21 +27,21 @@ export const AsideTheme: React.FC<AsideThemeProps> = ({ className = "" }) => {
 			<img src="/sun.svg" alt="light theme" />
 			<button
 				onClick={onClick}
-				className={`w-10 hover:bg-purple-300 transition-colors h-5 px-[3px] flex items-center ${
-					theme === "dark" ? "flex-row-reverse" : "flex-row"
-				} rounded-full bg-purple-600`}
+				className={`w-10 hover:bg-purple-300 transition-colors h-5 px-[3px] relative rounded-full bg-purple-600`}
 			>
 				{theme && (
 					<motion.div
 						transition={{ ease: "easeInOut", duration: 0.15 }}
 						initial={{
 							scale: 0,
+							y: "-50%",
 						}}
 						animate={{
 							scale: 1,
+							x: theme === "light" ? "0px" : "20px",
+							y: "-50%",
 						}}
-						layout
-						className="w-[14px] h-[14px] rounded-full bg-white"
+						className={`w-[14px] h-[14px] rounded-full bg-white absolute top-1/2 transform -translate-x-1/2 -translate-y-1/2`}
 					></motion.div>
 				)}
 			</button>

@@ -9,7 +9,7 @@ import Logo from "../icon/logo";
 import { AsideNavLink } from "./aside-nav-link";
 import { AsideTheme } from "./aside-theme";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal } from "../shared/modal";
 import { AddBoard } from "../shared/add-board";
 import { RootState } from "~/lib/store";
@@ -36,18 +36,18 @@ export const Aside: React.FC = () => {
 		(state: RootState) => state.boards.selected
 	);
 
+	useEffect(() => {
+		console.log(isOpen);
+		// debugger
+	}, [isOpenStaggered]);
+
 	return (
 		<>
-			<AnimatePresence exitBeforeEnter onExitComplete={setDashboardLayout}>
+			<AnimatePresence exitBeforeEnter>
 				<motion.aside
-					layout
 					transition={{ ease: "easeInOut", duration: 0.15 }}
 					animate={{
 						width: isOpen ? "300px" : "0px",
-					}}
-					exit={{
-						width: "0px",
-						opacity: 0,
 					}}
 					onAnimationComplete={setDashboardLayout}
 					key="dashboard"

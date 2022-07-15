@@ -35,7 +35,6 @@ const DashboardId: React.FC = () => {
 	
 	if (data.board.columns.length === 0) return <NoColumn/>
 	return <Board />
-
 }
 
 export default DashboardId
