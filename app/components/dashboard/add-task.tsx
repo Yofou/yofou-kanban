@@ -38,6 +38,10 @@ export const AddTask: React.FC<AddTaskProps> = ({ show, setShow }) => {
 		if (fetcher.type === "done" && !fetcher.data) setShow(false);
 	}, [fetcher]);
 
+	useEffect(() => {
+		if (!show) setSubtasks([{ id: v4(), value: "" }]);
+	}, [show]);
+
 	return (
 		<Modal key={uuid} show={show} onClickedOutside={() => setShow(false)}>
 			<fetcher.Form method="post" action="/api/tasks">

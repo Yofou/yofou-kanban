@@ -10,11 +10,15 @@ import { getAllBoardTasks } from "~/lib/service/board.serivce";
 import { set as setBoards } from "~/lib/store/boards-slice";
 import { set as setUser } from "~/lib/store/user-slice";
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({ request, params }) => {
 	const session = await getSession(request.headers.get("Cookie"));
 	if (session.id?.length === 0) return redirect("/");
 
 	const boards = await getAllBoardTasks(session.data.user.id);
+	if (!params?.id && boards.length) {
+		return redirect(`/dashboard/${boards[0].id}?dashboard`);
+	}
+
 	return json({
 		user: session.data.user,
 		boards,

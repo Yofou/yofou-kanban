@@ -11,6 +11,8 @@ import { ConfirmDelete } from "~/components/shared/confirm-delete";
 import { Modal } from "../shared/modal";
 import { EditBoard } from "../shared/edit-board";
 import { AddTask } from "./add-task";
+import { MobileAside } from "~/components/dashboard/mobile-aside";
+import { AddBoard } from "../shared/add-board";
 
 export const Nav: React.FC = () => {
 	const fetcher = useFetcher();
@@ -27,6 +29,8 @@ export const Nav: React.FC = () => {
 		(state: RootState) => state.boards.selected
 	);
 
+	const [isMobileAsideOpen, setIsMobileAsideOpen] = useState(false);
+
 	const [isEditBoardOpen, setIsEditBoardOpen] = useState(false);
 	const closeEditBoard = () => setIsEditBoardOpen(false);
 
@@ -42,6 +46,8 @@ export const Nav: React.FC = () => {
 	};
 
 	const [isAddingTask, setIsAddingTask] = useState(false);
+	const [isCreateBoardOpen, setIsCreateBoardOpen] = useState(false);
+	const onCreateBoard = () => setIsCreateBoardOpen(!isCreateBoardOpen);
 
 	const onSignOut = () => {
 		fetcher.submit(null, { method: "delete", action: "/api/session" });
@@ -89,10 +95,24 @@ export const Nav: React.FC = () => {
 								duration: 0.15,
 							}}
 							layout
-							className="text-heading-l sm:text-heading-xl text-grey-700 dark:text-white"
+							className="text-heading-xl hidden sm:block text-grey-700 dark:text-white"
 						>
 							{selectedBoard?.title ?? "Select a board"}
 						</motion.h2>
+
+						<button
+							onClick={() => setIsMobileAsideOpen(!isMobileAsideOpen)}
+							className="sm:hidden flex gap-2 text-heading-l text-grey-700 dark:text-white"
+						>
+							{selectedBoard?.title ?? "Please Select a board"}
+							<img
+								className={`transition-transform ${
+									isMobileAsideOpen ? "-rotate-180" : "rotate-0"
+								}`}
+								src="/chevron.svg"
+								alt=""
+							/>
+						</button>
 
 						{selectedBoard && (
 							<Button
@@ -151,6 +171,19 @@ export const Nav: React.FC = () => {
 
 			<Modal show={isEditBoardOpen} onClickedOutside={closeEditBoard}>
 				<EditBoard onModalClose={closeEditBoard} />
+			</Modal>
+
+			<MobileAside
+				isOpen={isMobileAsideOpen}
+				setIsOpen={setIsMobileAsideOpen}
+				onCreateBoard={onCreateBoard}
+			/>
+
+			<Modal
+				show={isCreateBoardOpen}
+				onClickedOutside={() => setIsCreateBoardOpen(false)}
+			>
+				<AddBoard onModalClose={() => setIsCreateBoardOpen(false)} />
 			</Modal>
 
 			<AddTask show={isAddingTask} setShow={setIsAddingTask} />

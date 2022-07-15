@@ -5,7 +5,10 @@ import { motion } from "framer-motion";
 import { useEffect } from "react";
 import { set as setTheme } from "~/lib/store/theme-slice";
 
-export const AsideTheme: React.FC = () => {
+type AsideThemeProps = {
+	className?: string;
+};
+export const AsideTheme: React.FC<AsideThemeProps> = ({ className = "" }) => {
 	const dispatch = useDispatch();
 	const fetcher = useFetcher();
 	const theme = useSelector((state: RootState) => state.theme);
@@ -18,7 +21,9 @@ export const AsideTheme: React.FC = () => {
 	}, [fetcher]);
 
 	return (
-		<div className="w-[calc(100%-50px)] grid grid-cols-[repeat(3,max-content)] gap-6 place-content-center place-self-center bg-grey-100 dark:bg-grey-600 rounded-[6px] py-[14px]">
+		<div
+			className={`w-[calc(100%-50px)] grid grid-cols-[repeat(3,max-content)] gap-6 place-content-center place-self-center bg-grey-100 dark:bg-grey-600 rounded-[6px] py-[14px] ${className}`}
+		>
 			<img src="/sun.svg" alt="light theme" />
 			<button
 				onClick={onClick}
